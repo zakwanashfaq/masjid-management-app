@@ -1,0 +1,10 @@
+
+$divider_ration: 70vh;
+
+.dashboard_top_section {
+    height: $divider_ration;
+}
+
+.dashboard_bottom_section {
+    height: calc(100vh - #{$divider_ration});
+}
