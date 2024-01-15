@@ -46,7 +46,7 @@ function TableTile(props: TableTileProps) {
         <th className="h1" scope="col">
             <div className="m-1 rounded d-flex bg-secondary justify-content-center align-items-center" style={{ height: "160px" }}>
                 <div className="p-3 d-flex flex-column justify-content-center align-items-center">
-                    <span>
+                    <span className="display-3">
                         {time}
                     </span>
                     <span className="h5">
@@ -65,7 +65,7 @@ type TableHeaderTileProps = {
 
 function TableHeaderTile(props: TableHeaderTileProps) {
     return (
-        <th className="h2" scope="col">
+        <th className="h5" scope="col">
             <div className="m-1 rounded d-flex bg-primary justify-content-center align-items-center" style={{ height: "80px" }}>
                 {props.text}
             </div>
@@ -78,6 +78,9 @@ function PrayerTimeTableHorizontal() {
     return (
         <>
             <div className="row px-2 py-4">
+                <div className="col-12 text-light d-flex justify-content-center bg-secondary rounded fw-bold m-1 py-3">
+                    Prayer Times for 10 Paton Street
+                </div>
                 <table className="table-dark table-borderless">
                     <thead>
                         <tr>
@@ -95,7 +98,7 @@ function PrayerTimeTableHorizontal() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        {/* <tr>
                             <th className="h2" scope="col">
                                 <div className="m-1 rounded d-flex bg-secondary justify-content-center align-items-center" style={{ height: "160px" }}>
                                     Azan
@@ -107,9 +110,9 @@ function PrayerTimeTableHorizontal() {
                             <TableTile text={prayerTimes.asr} />
                             <TableTile text={prayerTimes.magrib} />
                             <TableTile text={prayerTimes.isha} />
-                        </tr>
+                        </tr> */}
                         <tr>
-                            <th className="h2" scope="col">
+                            <th className="h5" scope="col">
                                 <div className="m-1 rounded px-2 d-flex bg-secondary justify-content-center align-items-center" style={{ height: "160px" }}>
                                     Iqama
                                 </div>
