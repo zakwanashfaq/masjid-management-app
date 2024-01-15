@@ -7,7 +7,7 @@ function App() {
   return (
     <div className='p-0 m-0 vh-100 bg-dark'>
       <Navbar />
-      <div>
+      <div className='container-lg'>
         <PrayerBannerTimetable />
       </div>
       
