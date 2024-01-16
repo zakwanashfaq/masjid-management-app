@@ -22,7 +22,11 @@ export default function Navbar() {
                             Islamic Committee of Newfoundland and Labrador
                         </div>
                     </div>
-                    <button className="btn btn-success" type="button">DONATE</button>
+                    <a 
+                        className="btn btn-success" 
+                        type="button"
+                        href="https://donate.stripe.com/bIY3eda7W1Kx13yaEE"
+                    >DONATE</a>
                 </div>
             </nav>
         </>
