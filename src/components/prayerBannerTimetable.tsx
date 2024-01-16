@@ -1,12 +1,13 @@
 
-const prayerTimes = {
-    fajr: "0600",
-    shurooq: "0700",
-    zuhr: "1210",
-    asr: "1310",
-    magrib: "1800",
-    isha: "1830",
-    jumma: "1300",
+
+type prayerTimesType = {
+    fajr: string,
+    shurooq: string,
+    zuhr: string,
+    asr: string,
+    magrib: string,
+    isha: string,
+    jumma: string,
 };
 
 function convertTo12HourFormat(time: string): [string, string] {
@@ -26,13 +27,23 @@ function convertTo12HourFormat(time: string): [string, string] {
 
 
 export default function PrayerBannerTimetable() {
+    const prayerTimes: prayerTimesType = {
+        fajr: "0600",
+        shurooq: "0700",
+        zuhr: "1210",
+        asr: "1310",
+        magrib: "1800",
+        isha: "1830",
+        jumma: "1300",
+    };
+
     return (
         <>
             <div className="d-none d-lg-block">
-                <PrayerTimeTableHorizontal />
+                <PrayerTimeTableHorizontal prayerTimes={prayerTimes} />
             </div>
             <div className="d-lg-none">
-                <PrayerTimeTableVertical />
+                <PrayerTimeTableVertical prayerTimes={prayerTimes} />
             </div>
         </>
     );
@@ -94,8 +105,11 @@ function TableHeaderTile(props: TableHeaderTileProps) {
     );
 }
 
+type PrayerTimeTableProps = {
+    prayerTimes: prayerTimesType;
+}
 
-function PrayerTimeTableHorizontal() {
+function PrayerTimeTableHorizontal(props: PrayerTimeTableProps) {
     return (
         <>
             <div className="text-light mb-1  mt-4 d-flex justify-content-center bg-secondary rounded fw-bold py-3">
@@ -119,31 +133,18 @@ function PrayerTimeTableHorizontal() {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* <tr>
-                            <th className="h2" scope="col">
-                                <div className="m-1 rounded d-flex bg-secondary justify-content-center align-items-center" style={{ height: "160px" }}>
-                                    Azan
-                                </div>
-                            </th>
-                            <TableTile text={prayerTimes.fajr} />
-                            <TableTile text={prayerTimes.shurooq} />
-                            <TableTile text={prayerTimes.zuhr} />
-                            <TableTile text={prayerTimes.asr} />
-                            <TableTile text={prayerTimes.magrib} />
-                            <TableTile text={prayerTimes.isha} />
-                        </tr> */}
                         <tr>
                             <th className="h5" scope="col">
                                 <div className="m-1 rounded px-2 d-flex bg-secondary justify-content-center align-items-center" style={{ height: "160px" }}>
                                     Iqama
                                 </div>
                             </th>
-                            <TableTile text={prayerTimes.fajr} />
-                            <TableTile text={prayerTimes.shurooq} />
-                            <TableTile text={prayerTimes.zuhr} />
-                            <TableTile text={prayerTimes.asr} />
-                            <TableTile text={prayerTimes.magrib} />
-                            <TableTile text={prayerTimes.isha} />
+                            <TableTile text={props.prayerTimes.fajr} />
+                            <TableTile text={props.prayerTimes.shurooq} />
+                            <TableTile text={props.prayerTimes.zuhr} />
+                            <TableTile text={props.prayerTimes.asr} />
+                            <TableTile text={props.prayerTimes.magrib} />
+                            <TableTile text={props.prayerTimes.isha} />
                         </tr>
                     </tbody>
                 </table>
@@ -154,7 +155,7 @@ function PrayerTimeTableHorizontal() {
 }
 
 
-function PrayerTimeTableVertical() {
+function PrayerTimeTableVertical(props: PrayerTimeTableProps) {
     return (
         <>
             <div className="text-light mb-1  mt-4 d-flex justify-content-center bg-secondary rounded fw-bold py-3">
@@ -179,27 +180,27 @@ function PrayerTimeTableVertical() {
                     <tbody>
                         <tr>
                             <TableHeaderTile text="Fajr"/>
-                            <TableTileMobile text={prayerTimes.fajr} />
+                            <TableTileMobile text={props.prayerTimes.fajr} />
                         </tr>
                         <tr>
                             <TableHeaderTile text="Shurooq" />
-                            <TableTileMobile text={prayerTimes.shurooq} />
+                            <TableTileMobile text={props.prayerTimes.shurooq} />
                         </tr>
                         <tr>
                             <TableHeaderTile text="Zuhr" />
-                            <TableTileMobile text={prayerTimes.zuhr} />
+                            <TableTileMobile text={props.prayerTimes.zuhr} />
                         </tr>
                         <tr>
                             <TableHeaderTile text="Asr" />
-                            <TableTileMobile text={prayerTimes.asr} />
+                            <TableTileMobile text={props.prayerTimes.asr} />
                         </tr>
                         <tr>
                             <TableHeaderTile text="Magrib" />
-                            <TableTileMobile text={prayerTimes.magrib} />
+                            <TableTileMobile text={props.prayerTimes.magrib} />
                         </tr>
                         <tr>
                             <TableHeaderTile text="Isha" />
-                            <TableTileMobile text={prayerTimes.isha} />
+                            <TableTileMobile text={props.prayerTimes.isha} />
                         </tr>
                     </tbody>
                 </table>
