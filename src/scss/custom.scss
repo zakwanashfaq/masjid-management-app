@@ -1,4 +1,23 @@
 $primary: #7844a0;
 $secondary: #48305b;
 
+
+/* Modify scrollbar color and width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: $secondary;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #a37800;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #d59c00;
+}
+
+
 @import '~bootstrap/scss/bootstrap';

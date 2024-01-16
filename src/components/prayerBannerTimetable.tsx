@@ -28,8 +28,11 @@ function convertTo12HourFormat(time: string): [string, string] {
 export default function PrayerBannerTimetable() {
     return (
         <>
-            <div className="">
+            <div className="d-none d-lg-block">
                 <PrayerTimeTableHorizontal />
+            </div>
+            <div className="d-lg-none">
+                <PrayerTimeTableVertical />
             </div>
         </>
     );
@@ -37,20 +40,38 @@ export default function PrayerBannerTimetable() {
 
 type TableTileProps = {
     text: string;
-    lg?: boolean
+    sm?: boolean
 }
 
 function TableTile(props: TableTileProps) {
     const [time, period] = convertTo12HourFormat(props.text);
     return (
         <th className="h1" scope="col">
-            <div className="m-1 rounded d-flex bg-secondary justify-content-center align-items-center" style={{ height: "160px" }}>
-                <div className="p-3 d-flex flex-column justify-content-center align-items-center">
+            <div className="m-1 rounded d-flex bg-primary bg-opacity-75 justify-content-center align-items-center" style={!props.sm ? { height: "160px" } : {}}>
+                <div className={(props.sm ? "flex-row p-1" : "flex-column p-3") + " d-flex justify-content-center align-items-center"}>
                     <span className="display-3">
                         {time}
                     </span>
                     <span className="h5">
                         {period}
+                    </span>
+                </div>
+            </div>
+        </th>
+    );
+}
+
+function TableTileMobile(props: TableTileProps) {
+    const [time, period] = convertTo12HourFormat(props.text);
+    return (
+        <th className="h1" scope="col">
+            <div className="m-1 rounded d-flex bg-secondary justify-content-center align-items-center" style={!props.sm ? { height: "80px" } : {}}>
+                <div className={" d-flex justify-content-center align-items-center"}>
+                    <span className="display-3">
+                        {time}
+                        <span className="h5">
+                            {period}
+                        </span>
                     </span>
                 </div>
             </div>
@@ -77,10 +98,10 @@ function TableHeaderTile(props: TableHeaderTileProps) {
 function PrayerTimeTableHorizontal() {
     return (
         <>
-            <div className="row px-2 py-4">
-                <div className="col-12 text-light d-flex justify-content-center bg-secondary rounded fw-bold m-1 py-3">
-                    Prayer Times for 10 Paton Street
-                </div>
+            <div className="text-light mb-1  mt-4 d-flex justify-content-center bg-secondary rounded fw-bold py-3">
+                Prayer Times for 10 Paton Street
+            </div>
+            <div className="row px-2 pb-4 d-flex flex-row justfy-content-center">
                 <table className="table-dark table-borderless">
                     <thead>
                         <tr>
@@ -123,6 +144,62 @@ function PrayerTimeTableHorizontal() {
                             <TableTile text={prayerTimes.asr} />
                             <TableTile text={prayerTimes.magrib} />
                             <TableTile text={prayerTimes.isha} />
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </>
+    );
+}
+
+
+function PrayerTimeTableVertical() {
+    return (
+        <>
+            <div className="text-light mb-1  mt-4 d-flex justify-content-center bg-secondary rounded fw-bold py-3">
+                Prayer Times for 10 Paton Street
+            </div>
+            <div className="row px-2 pb-4 d-flex flex-row justfy-content-center">
+                <table className="table-dark table-borderless">
+                    <thead>
+                        <tr>
+                            <th className="h2" scope="col">
+                                <div className="m-1 rounded d-flex bg-secondary justify-content-center align-items-center" style={{ height: "50px" }}>
+
+                                </div>
+                            </th>
+                            <th className="h5" scope="col">
+                                <div className="m-1 rounded px-2 d-flex bg-secondary justify-content-center align-items-center" style={{ height: "50px" }}>
+                                    Iqama
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <TableHeaderTile text="Fajr"/>
+                            <TableTileMobile text={prayerTimes.fajr} />
+                        </tr>
+                        <tr>
+                            <TableHeaderTile text="Shurooq" />
+                            <TableTileMobile text={prayerTimes.shurooq} />
+                        </tr>
+                        <tr>
+                            <TableHeaderTile text="Zuhr" />
+                            <TableTileMobile text={prayerTimes.zuhr} />
+                        </tr>
+                        <tr>
+                            <TableHeaderTile text="Asr" />
+                            <TableTileMobile text={prayerTimes.asr} />
+                        </tr>
+                        <tr>
+                            <TableHeaderTile text="Magrib" />
+                            <TableTileMobile text={prayerTimes.magrib} />
+                        </tr>
+                        <tr>
+                            <TableHeaderTile text="Isha" />
+                            <TableTileMobile text={prayerTimes.isha} />
                         </tr>
                     </tbody>
                 </table>

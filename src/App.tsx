@@ -14,10 +14,10 @@ function App() {
         <PrayerBannerTimetable />
         <br />
         <div className="row pb-4">
-          <div className="col-12 col-lg-4">
+          {/* <div className="col-12 col-lg-4">
             <UpcomingEventsWidget />
-          </div>
-          <div className="col-12 col-lg-8">
+          </div> */}
+          <div className="col-12">
             <ActivitiesWidget />
           </div>
         </div>
