@@ -19,7 +19,7 @@ export default function Navbar() {
                             ICNL
                         </div>
                         <div className="d-none d-md-block text-light">
-                            Islamic Committee of Newfoundland and Labrador
+                            Islamic Center of Newfoundland and Labrador
                         </div>
                     </div>
                     <a 
