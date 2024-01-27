@@ -1,3 +1,4 @@
+import PrayTimes from "../PrayerTimes";
 
 
 type prayerTimesType = {
@@ -8,6 +9,18 @@ type prayerTimesType = {
     magrib: string,
     isha: string,
     jumma: string,
+};
+
+type PrayerTimeTypeOutput = {
+    imsak: string;
+    fajr: string;
+    sunrise: string;
+    dhuhr: string;
+    asr: string;
+    sunset: string;
+    maghrib: string;
+    isha: string;
+    midnight: string;
 };
 
 function convertTo12HourFormat(time: string): [string, string] {
@@ -27,13 +40,17 @@ function convertTo12HourFormat(time: string): [string, string] {
 
 
 export default function PrayerBannerTimetable() {
+    
+
+    const prayerTimesObj: any = PrayTimes("ISNA");
+    const prayerTimesTemp: PrayerTimeTypeOutput = prayerTimesObj.getTimes(new Date(), [47.6, -52.7], -3.5, 0, "24h");
     const prayerTimes: prayerTimesType = {
-        fajr: "0600",
-        shurooq: "0700",
-        zuhr: "1210",
-        asr: "1310",
-        magrib: "1800",
-        isha: "1830",
+        fajr: prayerTimesTemp.fajr.replace(':', ''),
+        shurooq: prayerTimesTemp.sunrise.replace(':', ''),
+        zuhr: prayerTimesTemp.dhuhr.replace(':', ''),
+        asr: prayerTimesTemp.asr.replace(':', ''),
+        magrib: prayerTimesTemp.maghrib.replace(':', ''),
+        isha: prayerTimesTemp.isha.replace(':', ''),
         jumma: "1300",
     };
 
