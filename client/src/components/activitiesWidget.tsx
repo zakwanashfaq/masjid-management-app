@@ -3,7 +3,7 @@ export default function ActivitiesWidget() {
     return (
         <>
             <div className='text-light'>
-                <div className='pb-4'>
+                <div className='pb-4 fs-4'>
                     Activities
                 </div>
                 <div className="row">

@@ -1,3 +1,4 @@
+import AboutUsWidget from './components/aboutUsWidget';
 import ActivitiesWidget from './components/activitiesWidget';
 import Footer from './components/footer';
 import Navbar from './components/navbar';
@@ -20,6 +21,7 @@ function App() {
           <div className="col-12">
             <ActivitiesWidget />
           </div>
+          <AboutUsWidget />
         </div>
       </div>
       <Footer />
