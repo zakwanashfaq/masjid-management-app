@@ -34,8 +34,8 @@ export default function ActivitiesWidget() {
                     </div>
                     <div className="card bg-primary bg-opacity-25">
                         <div className="card-body">
-                            <h5 className="card-title">Weekly Speech</h5>
-                            <p className="card-text">A reminder given on stories of sahabah, hadiths and iman on weekends.</p>
+                            <h5 className="card-title">Monthly Speech</h5>
+                            <p className="card-text">A reminder given on stories of sahabah, hadiths and iman on a weekend.</p>
                         </div>
                     </div>
                 </div>
