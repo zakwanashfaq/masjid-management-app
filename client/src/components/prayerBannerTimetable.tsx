@@ -75,9 +75,9 @@ function TableTile(props: TableTileProps) {
     const [time, period] = convertTo12HourFormat(props.text);
     return (
         <th className="h1" scope="col">
-            <div className="m-1 rounded d-flex bg-primary bg-opacity-75 justify-content-center align-items-center" style={!props.sm ? { height: "160px" } : {}}>
+            <div className="m-1 rounded d-flex bg-primary bg-opacity-50 justify-content-center align-items-center" style={!props.sm ? { height: "160px" } : {}}>
                 <div className={(props.sm ? "flex-row p-1" : "flex-column p-3") + " d-flex justify-content-center align-items-center"}>
-                    <span className="display-3">
+                    <span className="display-3 fw-bold">
                         {time}
                     </span>
                     <span className="h5">
@@ -93,7 +93,7 @@ function TableTileMobile(props: TableTileProps) {
     const [time, period] = convertTo12HourFormat(props.text);
     return (
         <th className="h1" scope="col">
-            <div className="m-1 rounded d-flex bg-secondary justify-content-center align-items-center" style={!props.sm ? { height: "80px" } : {}}>
+            <div className="m-1 rounded d-flex bg-secondary bg-opacity-75 justify-content-center align-items-center" style={!props.sm ? { height: "80px" } : {}}>
                 <div className={" d-flex justify-content-center align-items-center"}>
                     <span className="display-3">
                         {time}
@@ -115,7 +115,7 @@ type TableHeaderTileProps = {
 function TableHeaderTile(props: TableHeaderTileProps) {
     return (
         <th className="h5" scope="col">
-            <div className="m-1 rounded d-flex bg-primary justify-content-center align-items-center" style={{ height: "80px" }}>
+            <div className="m-1 rounded d-flex bg-primary bg-opacity-75 justify-content-center align-items-center" style={{ height: "80px" }}>
                 {props.text}
             </div>
         </th>
