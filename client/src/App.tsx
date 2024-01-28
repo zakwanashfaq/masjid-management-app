@@ -9,7 +9,7 @@ import './scss/dashboard.scss';
 
 function App() {
   return (
-    <div className='p-0 m-0 bg-dark' style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+    <div className='p-0 m-0' style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <Navbar />
       <div className='container-lg flex-grow-1'>
         <PrayerBannerTimetable />

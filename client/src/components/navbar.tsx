@@ -2,7 +2,7 @@
 export default function Navbar() {
     return (
         <>
-            <div className="bg-secondary bg-opacity-50 text-light">
+            <div className="bg-secondary text-light">
                 <div className="container-xl py-2 d-flex flex-row-reverse">
                     <div className="d-flex flex-row align-items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-geo-alt-fill me-1" viewBox="0 0 16 16">
@@ -15,10 +15,10 @@ export default function Navbar() {
             <nav className="navbar py-4">
                 <div className="container-xl">
                     <div className="navbar-brand mb-0 h1 text-wrap">
-                        <div className="d-md-none text-light">
+                        <div className="d-md-none">
                             ICNL
                         </div>
-                        <div className="d-none d-md-block text-light">
+                        <div className="d-none d-md-block fs-3">
                             Islamic Center of Newfoundland and Labrador
                         </div>
                     </div>
