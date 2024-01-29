@@ -1,13 +1,12 @@
-import AboutUsWidget from './components/aboutUsWidget';
-import ActivitiesWidget from './components/activitiesWidget';
-import Footer from './components/footer';
-import Navbar from './components/navbar';
-import PrayerBannerTimetable from './components/prayerBannerTimetable';
-import UpcomingEventsWidget from './components/upcomingEventsWidget';
-import './scss/custom.scss';
-import './scss/dashboard.scss';
+import AboutUsWidget from '../components/aboutUsWidget';
+import ActivitiesWidget from '../components/activitiesWidget';
+import Footer from '../components/footer';
+import Navbar from '../components/navbar';
+import PrayerBannerTimetable from '../components/prayerBannerTimetable';
+import '../scss/custom.scss';
+import '../scss/dashboard.scss';
 
-function App() {
+function HomePage() {
   return (
     <div className='p-0 m-0' style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <Navbar />
@@ -29,4 +28,4 @@ function App() {
   );
 }
 
-export default App;
+export default HomePage;
