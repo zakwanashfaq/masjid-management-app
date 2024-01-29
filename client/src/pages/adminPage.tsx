@@ -19,6 +19,7 @@ enum EDropDownStates {
 function AdjustPrayerTimeWidget_input(props: TAdjustPrayerTimeWidgetProps) {
     const prayerTimeOject = props.prayerTimeManager.getMethod(props.prayer_name);
     const [noChange, setNoChange] = useState<boolean>(prayerTimeOject.no_change);
+    const [inputValue, setInputValue] = useState<string>("");
     const [selectedDropdown, setSelectedDropdown] = useState<string>("");
 
     useEffect(() => {
@@ -39,10 +40,25 @@ function AdjustPrayerTimeWidget_input(props: TAdjustPrayerTimeWidgetProps) {
                 setNoChange(true);
             }
         } else {
-            prayerTimeOject.setNoChange(false);
-            setNoChange(false);
+            if (e.currentTarget.innerHTML === EDropDownStates.DELAY_IN_MINUTES) {
+                prayerTimeOject.setDelayInMinutes(0);
+                setNoChange(false);
+            }
+            if (e.currentTarget.innerHTML === EDropDownStates.SPECIFIC_TIME) {
+                prayerTimeOject.setSpecificTime("");
+                setNoChange(false);
+            }
         }
         setSelectedDropdown(e.currentTarget.innerHTML);
+    }
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (selectedDropdown === EDropDownStates.DELAY_IN_MINUTES) {
+            prayerTimeOject.setDelayInMinutes(parseInt(e.target.value));
+        } else if (selectedDropdown === EDropDownStates.SPECIFIC_TIME) {
+            prayerTimeOject.setSpecificTime(e.target.value);
+        }
+        setInputValue(e.target.value); // Update to use e.target.value instead of e.target.innerHTML
     }
 
     return (
@@ -56,7 +72,7 @@ function AdjustPrayerTimeWidget_input(props: TAdjustPrayerTimeWidgetProps) {
                         <li><hr className="dropdown-divider" /></li>
                         <li><a className="dropdown-item" href="#" onClick={handleDropDownClick}>{EDropDownStates.NO_CHANGE}</a></li>
                     </ul>
-                    <input type="text" disabled={noChange} className="form-control" aria-label="Text input with segmented dropdown button" />
+                    <input type="text" disabled={noChange} className="form-control" value={inputValue} onChange={handleInputChange} aria-label="Text input with segmented dropdown button" />
                     <button type="button" className="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                         <span className="pe-2">{selectedDropdown}</span>
                     </button>
@@ -70,7 +86,10 @@ function AdjustPrayerTimeWidget_input(props: TAdjustPrayerTimeWidgetProps) {
 function AdjustPrayerTimeWidget() {
 
     const prayerTimeManager = new PrayerTimesManager();
-    console.log(prayerTimeManager.getPrayerTimes());
+    
+    const handleSaveChanges = () => {  
+        console.log(prayerTimeManager.getPrayerTimes());
+    }
 
     return (
         <>
@@ -83,7 +102,7 @@ function AdjustPrayerTimeWidget() {
                     <AdjustPrayerTimeWidget_input prayer_name={EPrayerNames.ISHA} prayerTimeManager={prayerTimeManager} />
                 </div>
                 <div>
-                    <button className='btn btn-primary mt-3'>Save Changes</button>
+                    <button className='btn btn-primary mt-3' onClick={handleSaveChanges}>Save Changes</button>
                 </div>
             </div>
         </>
