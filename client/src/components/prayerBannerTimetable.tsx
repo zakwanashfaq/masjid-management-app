@@ -1,7 +1,7 @@
-import PrayTimes from "../PrayerTimes";
+import PrayTimes from "../utils/PrayerTimes";
 
 
-type prayerTimesType = {
+export type prayerTimesType = {
     fajr: string,
     shurooq: string,
     zuhr: string,
@@ -11,7 +11,7 @@ type prayerTimesType = {
     jumma: string,
 };
 
-type PrayerTimeTypeOutput = {
+export type PrayerTimeTypeOutput = {
     imsak: string;
     fajr: string;
     sunrise: string;
@@ -41,7 +41,7 @@ function convertTo12HourFormat(time: string): [string, string] {
 
 export default function PrayerBannerTimetable() {
     
-
+    // Todo: Make an adapter for this so it does not need to be copy pasted
     const prayerTimesObj: any = PrayTimes("ISNA");
     prayerTimesObj.adjust({ asr: 'Hanafi'});
     const prayerTimesTemp: PrayerTimeTypeOutput = prayerTimesObj.getTimes(new Date(), [47.6, -52.7], -3.5, 0, "24h");
@@ -54,6 +54,7 @@ export default function PrayerBannerTimetable() {
         isha: prayerTimesTemp.isha.replace(':', ''),
         jumma: "1300",
     };
+    // End 
 
     return (
         <>

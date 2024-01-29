@@ -1,5 +1,4 @@
 import AboutUsWidget from '../components/aboutUsWidget';
-import ActivitiesWidget from '../components/activitiesWidget';
 import Footer from '../components/footer';
 import Navbar from '../components/navbar';
 import PrayerBannerTimetable from '../components/prayerBannerTimetable';
@@ -17,9 +16,9 @@ function HomePage() {
           {/* <div className="col-12 col-lg-4">
             <UpcomingEventsWidget />
           </div> */}
-          <div className="col-12">
+          {/* <div className="col-12">
             <ActivitiesWidget />
-          </div>
+          </div> */}
           <AboutUsWidget />
         </div>
       </div>

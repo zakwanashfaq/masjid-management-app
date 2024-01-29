@@ -1,5 +1,6 @@
 
 export default function LoginPage() {
+    // add firebase or aws cognito auth here
     return (
         <>
             <div className="container-sm">
