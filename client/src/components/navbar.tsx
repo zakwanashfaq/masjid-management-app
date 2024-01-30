@@ -12,6 +12,14 @@ export default function Navbar() {
                     </div>
                 </div>
             </div>
+            {/* <div className="bg-secondary bg-opacity-25 py-2 sticky-top">
+                <div className="container-xl d-flex justify-content-eond flex-wrap">
+                    <a className="fs-5 pe-4 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="/">Home</a>
+                    <a className="fs-5 pe-4 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="/">Prayer Times</a>
+                    <a className="fs-5 pe-4 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="/">Announcements</a>
+                    <a className="fs-5 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="/">Contacts</a>
+                </div>
+            </div> */}
             <nav className="navbar py-4">
                 <div className="container-xl">
                     <div className="navbar-brand mb-0 h1 text-wrap">
@@ -22,11 +30,17 @@ export default function Navbar() {
                             Islamic Center of Newfoundland and Labrador
                         </div>
                     </div>
-                    <a 
-                        className="btn btn-success" 
-                        type="button"
-                        href="https://donate.stripe.com/bIY3eda7W1Kx13yaEE"
-                    >DONATE</a>
+                    <div className="d-flex align-items-center">
+                        <a className="fs-5 pe-4 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="/">Home</a>
+                        <a className="fs-5 pe-4 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="/">Prayer Times</a>
+                        <a className="fs-5 pe-4 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="/">Announcements</a>
+                        <a className="fs-5 pe-4 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="/">Contacts</a>
+                        <a 
+                            className="btn btn-success" 
+                            type="button"
+                            href="https://donate.stripe.com/bIY3eda7W1Kx13yaEE"
+                        >DONATE</a>
+                    </div>
                 </div>
             </nav>
         </>
