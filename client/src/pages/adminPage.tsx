@@ -1,8 +1,6 @@
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import { useEffect, useState } from 'react';
 import PrayerTimesManager, { EPrayerNames } from '../utils/PrayerTimesWidget';
-import PrayTimes from '../utils/PrayerTimes';
-import { PrayerTimeTypeOutput, prayerTimesType } from '../components/prayerBannerTimetable';
 
 
 type TAdjustPrayerTimeWidgetProps = {
@@ -123,6 +121,9 @@ export default function AdminPage() {
                     <div className="col-12 col-md-3">
                         <div className="fs-4 pt-4">
                             Adjust payer times
+                        </div>
+                        <div className="">
+                            Note: add instructions here.
                         </div>
                     </div>
                     <div className="col-12 col-md-9">
