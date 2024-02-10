@@ -1,0 +1,10 @@
+{
+  "resource": "/login",
+  "path": "/login",
+  "httpMethod": "POST",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "body": "{\"username\":\"your_username\",\"password\":\"your_password\"}",
+  "isBase64Encoded": false
+}

@@ -31,6 +31,46 @@ Resources:
       CodeUri: getAllItemsFunction
     Metadata:
       SamResourceId: getAllItemsFunction
+  loginFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/auth/login.loginWithUsernamePassword
+      Runtime: nodejs18.x
+      Architectures:
+      - x86_64
+      MemorySize: 128
+      Timeout: 30
+      Description: A simple example includes a HTTP get method to get all items from
+        a DynamoDB table.
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /login
+            Method: POST
+      CodeUri: loginFunction
+    Metadata:
+      SamResourceId: loginFunction
+  signUpFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/auth/signup.signupWithUsernamePassword
+      Runtime: nodejs18.x
+      Architectures:
+      - x86_64
+      MemorySize: 128
+      Timeout: 30
+      Description: A simple example includes a HTTP get method to get all items from
+        a DynamoDB table.
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /signup
+            Method: POST
+      CodeUri: signUpFunction
+    Metadata:
+      SamResourceId: signUpFunction
   getByIdFunction:
     Type: AWS::Serverless::Function
     Properties:

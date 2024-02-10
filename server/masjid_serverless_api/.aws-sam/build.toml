@@ -5,8 +5,8 @@ codeuri = "D:\\masjid-display\\server\\masjid_serverless_api"
 runtime = "nodejs18.x"
 architecture = "x86_64"
 handler = "src/handlers/get-all-items.getAllItemsHandler"
-manifest_hash = "06bb6084b7d7b33117e7e1bd9fafb90c"
+manifest_hash = "ff9c2db325589ff98c90d9909abb1f9d"
 packagetype = "Zip"
-functions = ["getAllItemsFunction", "getByIdFunction", "putItemFunction"]
+functions = ["getAllItemsFunction", "loginFunction", "signUpFunction", "getByIdFunction", "putItemFunction"]
 
 [layer_build_definitions]

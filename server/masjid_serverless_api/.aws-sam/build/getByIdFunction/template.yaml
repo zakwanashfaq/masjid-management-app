@@ -39,6 +39,60 @@ Resources:
   # Each Lambda function is defined by properties:
   # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
 
+  # This is a Lambda function config associated with the source code: login.js
+  loginFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/auth/login.loginWithUsernamePassword
+      Runtime: nodejs18.x
+      Architectures:
+      - x86_64
+      MemorySize: 128
+      Timeout: 30
+      Description: A simple example includes a HTTP get method to get all items from
+        a DynamoDB table.
+      # Policies:
+      #   # Give Create/Read/Update/Delete Permissions to the SampleTable
+      # - DynamoDBCrudPolicy:
+      #     TableName: !Ref SampleTable
+      # Environment:
+      #   Variables:
+      #     # Make table name accessible as environment variable from function code during execution
+      #     SAMPLE_TABLE: !Ref SampleTable
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /login
+            Method: POST
+
+  signUpFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/auth/signup.signupWithUsernamePassword
+      Runtime: nodejs18.x
+      Architectures:
+      - x86_64
+      MemorySize: 128
+      Timeout: 30
+      Description: A simple example includes a HTTP get method to get all items from
+        a DynamoDB table.
+      # Policies:
+      #   # Give Create/Read/Update/Delete Permissions to the SampleTable
+      # - DynamoDBCrudPolicy:
+      #     TableName: !Ref SampleTable
+      # Environment:
+      #   Variables:
+      #     # Make table name accessible as environment variable from function code during execution
+      #     SAMPLE_TABLE: !Ref SampleTable
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /signup
+            Method: POST
+    
+
   # This is a Lambda function config associated with the source code: get-by-id.js
   getByIdFunction:
     Type: AWS::Serverless::Function

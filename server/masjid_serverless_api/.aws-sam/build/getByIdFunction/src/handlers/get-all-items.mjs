@@ -28,7 +28,7 @@ export const getAllItemsHandler = async (event) => {
 
     try {
         //const data = await ddbDocClient.send(new ScanCommand(params));
-        var items = {stat: "yay"}; //data.Items;
+        var items = {stat: "yay 2.0"}; //data.Items;
     } catch (err) {
         console.log("Error", err);
     }
