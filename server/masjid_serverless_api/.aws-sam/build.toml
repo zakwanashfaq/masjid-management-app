@@ -6,7 +6,7 @@ codeuri = "D:\\masjid-display\\server\\masjid_serverless_api"
 runtime = "nodejs18.x"
 architecture = "x86_64"
 handler = "src/handlers/get-all-items.getAllItemsHandler"
-manifest_hash = "cf45e9b98e443587cfad6c14db688bfb"
+manifest_hash = "166be813561c62e0b4e45a2fd5fc8d5b"
 packagetype = "Zip"
 functions = ["getAllItemsFunction", "loginFunction", "signUpFunction", "getByIdFunction", "putItemFunction"]
 
@@ -15,7 +15,7 @@ codeuri = "D:\\masjid-display\\server\\masjid_serverless_api"
 runtime = "nodejs14.x"
 architecture = "x86_64"
 handler = "src/handlers/auth/authorizer.handler"
-manifest_hash = "cf45e9b98e443587cfad6c14db688bfb"
+manifest_hash = "166be813561c62e0b4e45a2fd5fc8d5b"
 packagetype = "Zip"
 functions = ["ValidateTokenAuthorizer"]
 
