@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "sam build && sam local start-api",
-    "start-hot-reload": "nodemon --exec \"sam build && sam local start-api\"",
+    "dev": "nodemon --exec \"sam build && sam local start-api\"",
     "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js"
   },
   "jest": {

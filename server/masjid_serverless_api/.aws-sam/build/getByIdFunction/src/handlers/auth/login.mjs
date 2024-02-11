@@ -22,7 +22,8 @@ export const loginWithUsernamePassword = async (event, context, callback) => {
         },
         body: JSON.stringify({
           message: "Login successful",
-          requestBody
+          requestBody,
+          event
           // Include any other data you want to return here
         }),
       };

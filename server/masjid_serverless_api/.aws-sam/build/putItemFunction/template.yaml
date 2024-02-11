@@ -10,6 +10,19 @@ Resources:
   # Each Lambda function is defined by properties:
   # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
 
+  MyApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+      Auth:
+        DefaultAuthorizer: MyLambdaRequestAuthorizer
+        Authorizers:
+          MyLambdaRequestAuthorizer:
+            FunctionArn: !GetAtt ValidateTokenAuthorizer.Arn
+            Identity:
+              Header: Authorization
+              ValidationExpression: Bearer.*
+
   # This is a Lambda function config associated with the source code: get-all-items.js
   getAllItemsFunction:
     Type: AWS::Serverless::Function
@@ -69,7 +82,7 @@ Resources:
   signUpFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handlers/auth/signup.signupWithUsernamePassword
+      Handler: src/handlers/auth/signup.signUpWithUsernamePassword
       Runtime: nodejs18.x
       Architectures:
       - x86_64
@@ -150,6 +163,19 @@ Resources:
             Method: POST
   # Simple syntax to create a DynamoDB table with a single attribute primary key, more in
   # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlesssimpletable
+
+  ValidateTokenAuthorizer:
+    Type: AWS::Serverless::Function
+    Properties:
+      # CodeUri: authorizer/
+      Handler: src/handlers/auth/authorizer.handler
+      Runtime: nodejs14.x
+      Events:
+        Authorizer:
+          Type: Api
+          Properties:
+            Path: /authorizer
+            Method: POST
 
   # DynamoDB table to store item: {id: &lt;ID&gt;, name: &lt;NAME&gt;}
   SampleTable:

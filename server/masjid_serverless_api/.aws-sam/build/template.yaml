@@ -3,6 +3,21 @@ Description: API definition for the masjid_serverless_api masjid_serverless_api
 Transform:
 - AWS::Serverless-2016-10-31
 Resources:
+  MyApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+      Auth:
+        DefaultAuthorizer: MyLambdaRequestAuthorizer
+        Authorizers:
+          MyLambdaRequestAuthorizer:
+            FunctionArn:
+              Fn::GetAtt:
+              - ValidateTokenAuthorizer
+              - Arn
+            Identity:
+              Header: Authorization
+              ValidationExpression: Bearer.*
   getAllItemsFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -54,7 +69,7 @@ Resources:
   signUpFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handlers/auth/signup.signupWithUsernamePassword
+      Handler: src/handlers/auth/signup.signUpWithUsernamePassword
       Runtime: nodejs18.x
       Architectures:
       - x86_64
@@ -127,6 +142,20 @@ Resources:
       CodeUri: putItemFunction
     Metadata:
       SamResourceId: putItemFunction
+  ValidateTokenAuthorizer:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/auth/authorizer.handler
+      Runtime: nodejs14.x
+      Events:
+        Authorizer:
+          Type: Api
+          Properties:
+            Path: /authorizer
+            Method: POST
+      CodeUri: ValidateTokenAuthorizer
+    Metadata:
+      SamResourceId: ValidateTokenAuthorizer
   SampleTable:
     Type: AWS::Serverless::SimpleTable
     Properties:

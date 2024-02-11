@@ -7,7 +7,7 @@ export const signUpWithUsernamePassword = async (event) => {
 
     const requestBody = JSON.parse(event.body); // Parse the JSON body
     // extract username asn password from the request body
-    const username = requestBody.username;
+    const username = requestBody.username + 7666;
     const password = requestBody.password;
 
     // add the username and password to dynamoDB
@@ -20,7 +20,8 @@ export const signUpWithUsernamePassword = async (event) => {
         },
         body: JSON.stringify({
           message: "Sign-up successful",
-          requestBody
+          requestBody,
+          username
           // Include any other data you want to return here
         }),
       };
