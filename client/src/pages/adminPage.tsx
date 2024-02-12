@@ -119,11 +119,12 @@ export default function AdminPage() {
             <div className="container-lg mt-4">
                 <div className="row">
                     <div className="col-12 col-md-3">
-                        <div className="fs-4 pt-4">
+                        <div className="fs-4 pt-4 p-1">
                             Adjust payer times
                         </div>
-                        <div className="">
-                            Note: add instructions here.
+                        <div className="p-1">
+                            Note: For specific time use military hours. For example "5:30 PM" is "1730".
+                            For delay use a number. For example "30" is 30 minutes.
                         </div>
                     </div>
                     <div className="col-12 col-md-9">
