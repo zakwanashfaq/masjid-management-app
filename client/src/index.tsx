@@ -11,7 +11,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <Router>
     <Routes>
-      <Route path="/" element={<HomePage />} />
+      <Route path="/" element={<AdminPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/hjsafhegyiugdjcbdbckdbsjhcbdshkvbjsdhv" element={<AdminPage />} />
     </Routes>
