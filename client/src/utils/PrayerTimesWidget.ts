@@ -133,7 +133,7 @@ class PrayerTimesManager{
                 prayerTimes: this.getPrayerTimes()
             };
             console.log('Saving prayer times:', prayerTimesPayload);
-            const response = await fetch('http://localhost:5001/prayerTime', {
+            const response = await fetch('https://k80pnjbrb8.execute-api.us-east-1.amazonaws.com/Prod/prayerTime', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

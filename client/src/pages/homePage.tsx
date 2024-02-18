@@ -9,7 +9,7 @@ import '../scss/dashboard.scss';
 function HomePage() {
   const [landingPageData, setLandingPageData] = useState(null as any);
   useEffect(() => {
-    fetch('http://127.0.0.1:5001/landingPageData')
+    fetch('https://k80pnjbrb8.execute-api.us-east-1.amazonaws.com/Prod/landingPageData')
       .then(response => response.json())  // Parse the response as JSON
       .then(data => {
         console.log(data);
