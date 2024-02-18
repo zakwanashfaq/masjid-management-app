@@ -104,6 +104,43 @@ Resources:
           Properties:
             Path: /signup
             Method: POST
+
+
+  savePrayerTimeFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/prayerTimes/setPrayerTimes.handler
+      Runtime: nodejs18.x
+      Architectures:
+      - x86_64
+      MemorySize: 128
+      Timeout: 30
+      Description: A simple example includes a HTTP get method to get all items from
+        a DynamoDB table.
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /prayerTime
+            Method: POST
+
+  getLandingPageDataFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/getLandingPageData.handler
+      Runtime: nodejs18.x
+      Architectures:
+      - x86_64
+      MemorySize: 128
+      Timeout: 30
+      Description: A simple example includes a HTTP get method to get all items from
+        a DynamoDB table.
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /landingPageData
+            Method: GET
     
 
   # This is a Lambda function config associated with the source code: get-by-id.js
@@ -170,12 +207,6 @@ Resources:
       # CodeUri: authorizer/
       Handler: src/handlers/auth/authorizer.handler
       Runtime: nodejs14.x
-      Events:
-        Authorizer:
-          Type: Api
-          Properties:
-            Path: /authorizer
-            Method: POST
 
   # DynamoDB table to store item: {id: &lt;ID&gt;, name: &lt;NAME&gt;}
   SampleTable:
@@ -197,3 +228,8 @@ Globals:
   Function:
     LoggingConfig:
       LogFormat: JSON
+  Api:
+    Cors:
+      AllowMethods: "'OPTIONS,GET,PUT,POST,DELETE'"
+      AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+      AllowOrigin: "'*'"

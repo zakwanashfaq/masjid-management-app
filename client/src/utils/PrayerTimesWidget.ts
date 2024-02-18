@@ -126,6 +126,30 @@ class PrayerTimesManager{
             isha: this.isha.getPrayerTime()!
         };
     }
+
+    async savePrayerTimes() {
+        try {
+            const prayerTimesPayload = {
+                prayerTimes: this.getPrayerTimes()
+            };
+            console.log('Saving prayer times:', prayerTimesPayload);
+            const response = await fetch('http://localhost:5001/prayerTime', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(prayerTimesPayload)
+            });
+
+            if (response.ok) {
+                console.log('Prayer times saved successfully');
+            } else {
+                console.error('Failed to save prayer times');
+            }
+        } catch (error) {
+            console.error('An error occurred while saving prayer times:', error);
+        }
+    }
 }
 
 

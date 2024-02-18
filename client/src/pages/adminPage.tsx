@@ -86,7 +86,7 @@ function AdjustPrayerTimeWidget() {
     const prayerTimeManager = new PrayerTimesManager();
     
     const handleSaveChanges = () => {  
-        console.log(prayerTimeManager.getPrayerTimes());
+        prayerTimeManager.savePrayerTimes();
     }
 
     return (
