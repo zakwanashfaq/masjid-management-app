@@ -2,13 +2,7 @@
  * 
  */
 
-import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb';
-const client = new DynamoDBClient({});
-const ddbDocClient = DynamoDBDocumentClient.from(client);
-import { v4 as uuidv4 } from 'uuid';
-// Get the DynamoDB table name from environment variables
-const tableName = "icna_newfoundland"; //process.env.SAMPLE_TABLE;
+import { PrayerTimesModel } from "../../models/prayerTimesModel.mjs";
 
 export const loginWithUsernamePassword = async (event, context, callback) => {
   if (event.httpMethod !== 'POST') {
@@ -25,15 +19,8 @@ export const loginWithUsernamePassword = async (event, context, callback) => {
   // if not valid, return an error message
   let data;
   try {
-    const command = new PutCommand({
-      TableName: tableName,
-      Item: {
-        id: uuidv4(),
-        username: username,
-        password: password 
-      }
-    });
-    data = await ddbDocClient.send(command);
+    const prayerTimeModel = new PrayerTimesModel();
+    data = await prayerTimeModel.getPrayerTimes();
   } catch (err) {
     console.log("Error", err);
   }

@@ -13,7 +13,7 @@ root.render(
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/admin" element={<AdminPage />} />
+      <Route path="/hjsafhegyiugdjcbdbckdbsjhcbdshkvbjsdhv" element={<AdminPage />} />
     </Routes>
   </Router>,
 );

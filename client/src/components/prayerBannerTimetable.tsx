@@ -1,4 +1,5 @@
 import PrayTimes from "../utils/PrayerTimes";
+import { TPrayerTimePayload } from "../utils/PrayerTimesWidget";
 
 
 export type prayerTimesType = {
@@ -37,13 +38,15 @@ function convertTo12HourFormat(time: string): [string, string] {
     return [`${formattedHour}:${minute}`, period];
 }
 
+type TPrayerBannerTimetableProps = {
+    prayerTimes: TPrayerTimePayload
+}
 
+export default function PrayerBannerTimetable(props: TPrayerBannerTimetableProps) {
 
-export default function PrayerBannerTimetable() {
-    
     // Todo: Make an adapter for this so it does not need to be copy pasted
     const prayerTimesObj: any = PrayTimes("ISNA");
-    prayerTimesObj.adjust({ asr: 'Hanafi'});
+    prayerTimesObj.adjust({ asr: 'Hanafi' });
     const prayerTimesTemp: PrayerTimeTypeOutput = prayerTimesObj.getTimes(new Date(), [47.6, -52.7], -3.5, 0, "24h");
     const prayerTimes: prayerTimesType = {
         fajr: prayerTimesTemp.fajr.replace(':', ''),
@@ -54,7 +57,53 @@ export default function PrayerBannerTimetable() {
         isha: prayerTimesTemp.isha.replace(':', ''),
         jumma: "1300",
     };
-    // End 
+
+    // setting  times
+    if (props.prayerTimes.fajr.is_specific_time_active) {
+        prayerTimes.fajr = props.prayerTimes.fajr.specific_time_value;
+    } else if (props.prayerTimes.fajr.is_delay_in_minutes_active) {
+        const time = new Date();
+        time.setHours(parseInt(prayerTimes.fajr.substr(0, 2)));
+        time.setMinutes(parseInt(prayerTimes.fajr.substr(2, 2)) + props.prayerTimes.fajr.delay_in_minutes_value);
+        prayerTimes.fajr = time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }).replace(/:/g, '');
+    }
+
+
+    if (props.prayerTimes.zuhr.is_specific_time_active) {
+        prayerTimes.zuhr = props.prayerTimes.zuhr.specific_time_value;
+    } else if (props.prayerTimes.zuhr.is_delay_in_minutes_active) {
+        const time = new Date();
+        time.setHours(parseInt(prayerTimes.zuhr.substr(0, 2)));
+        time.setMinutes(parseInt(prayerTimes.zuhr.substr(2, 2)) + props.prayerTimes.zuhr.delay_in_minutes_value);
+        prayerTimes.zuhr = time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }).replace(/:/g, '');
+    }
+
+    if (props.prayerTimes.asr.is_specific_time_active) {
+        prayerTimes.asr = props.prayerTimes.asr.specific_time_value;
+    } else if (props.prayerTimes.asr.is_delay_in_minutes_active) {
+        const time = new Date();
+        time.setHours(parseInt(prayerTimes.asr.substr(0, 2)));
+        time.setMinutes(parseInt(prayerTimes.asr.substr(2, 2)) + props.prayerTimes.asr.delay_in_minutes_value);
+        prayerTimes.asr = time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }).replace(/:/g, '');
+    }
+
+    if (props.prayerTimes.maghrib.is_specific_time_active) {
+        prayerTimes.magrib = props.prayerTimes.maghrib.specific_time_value;
+    } else if (props.prayerTimes.maghrib.is_delay_in_minutes_active) {
+        const time = new Date();
+        time.setHours(parseInt(prayerTimes.magrib.substr(0, 2)));
+        time.setMinutes(parseInt(prayerTimes.magrib.substr(2, 2)) + props.prayerTimes.maghrib.delay_in_minutes_value);
+        prayerTimes.magrib = time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }).replace(/:/g, '');
+    }
+
+    if (props.prayerTimes.isha.is_specific_time_active) {
+        prayerTimes.isha = props.prayerTimes.isha.specific_time_value;
+    } else if (props.prayerTimes.isha.is_delay_in_minutes_active) {
+        const time = new Date();
+        time.setHours(parseInt(prayerTimes.isha.substr(0, 2)));
+        time.setMinutes(parseInt(prayerTimes.isha.substr(2, 2)) + props.prayerTimes.isha.delay_in_minutes_value);
+        prayerTimes.isha = time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }).replace(/:/g, '');
+    }
 
     return (
         <>
@@ -241,7 +290,7 @@ function PrayerTimeTableVertical(props: PrayerTimeTableProps) {
 
                                 </div>
                             </th>
-                            
+
                             <th className="h5" scope="col">
                                 <div className="m-1 rounded px-2 d-flex bg-secondary bg-opacity-25 justify-content-center align-items-center" style={{ height: "50px" }}>
                                     Azzan
@@ -256,7 +305,7 @@ function PrayerTimeTableVertical(props: PrayerTimeTableProps) {
                     </thead>
                     <tbody>
                         <tr>
-                            <TableHeaderTile text="Fajr"/>
+                            <TableHeaderTile text="Fajr" />
                             <TableTileMobileAzan text={props.prayerTimes.fajr} />
                             <TableTileMobileIqama text={props.prayerTimes.fajr} />
                         </tr>
