@@ -1,7 +1,8 @@
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import { useEffect, useState } from 'react';
 import PrayerTimesManager, { EPrayerNames } from '../utils/PrayerTimesWidget';
-
+import '../scss/custom.scss';
+import '../scss/dashboard.scss';
 
 type TAdjustPrayerTimeWidgetProps = {
     prayer_name: EPrayerNames,
