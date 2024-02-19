@@ -58,6 +58,8 @@ export default function PrayerBannerTimetable(props: TPrayerBannerTimetableProps
         jumma: "1300",
     };
 
+    const prayerTimesOriginal = { ...prayerTimes };
+
     // setting  times
     if (props.prayerTimes.fajr.is_specific_time_active) {
         prayerTimes.fajr = props.prayerTimes.fajr.specific_time_value;
@@ -108,10 +110,10 @@ export default function PrayerBannerTimetable(props: TPrayerBannerTimetableProps
     return (
         <>
             <div className="d-none d-lg-block">
-                <PrayerTimeTableHorizontal prayerTimes={prayerTimes} />
+                <PrayerTimeTableHorizontal prayerTimes={prayerTimes} prayerTimesOriginal={prayerTimesOriginal} />
             </div>
             <div className="d-lg-none">
-                <PrayerTimeTableVertical prayerTimes={prayerTimes} />
+                <PrayerTimeTableVertical prayerTimes={prayerTimes} prayerTimesOriginal={prayerTimesOriginal} />
             </div>
             <div className="fw-bold">
                 Note: Iqama times are when the congregation starts. Please come 5 minutes before the iqama time.
@@ -131,7 +133,7 @@ function TableTileIqama(props: TableTileProps) {
         <th className="h1" scope="col">
             <div className="m-1 text-light rounded d-flex bg-primary bg-opacity-75 justify-content-center align-items-center" style={!props.sm ? { height: "160px" } : {}}>
                 <div className={(props.sm ? "flex-row p-1" : "flex-column p-3") + " d-flex justify-content-center align-items-center"}>
-                    <span className="display-3 fw-bold">
+                    <span className="display-4 fw-bold">
                         {time}
                     </span>
                     <span className="h5">
@@ -214,6 +216,7 @@ function TableHeaderTile(props: TableHeaderTileProps) {
 
 type PrayerTimeTableProps = {
     prayerTimes: prayerTimesType;
+    prayerTimesOriginal: prayerTimesType;
 }
 
 function PrayerTimeTableHorizontal(props: PrayerTimeTableProps) {
@@ -237,6 +240,7 @@ function PrayerTimeTableHorizontal(props: PrayerTimeTableProps) {
                             <TableHeaderTile text="Asr" />
                             <TableHeaderTile text="Magrib" lg={true} />
                             <TableHeaderTile text="Isha" />
+                            <TableHeaderTile text="Jumma" />
                         </tr>
                     </thead>
                     <tbody>
@@ -246,12 +250,13 @@ function PrayerTimeTableHorizontal(props: PrayerTimeTableProps) {
                                     Azzan
                                 </div>
                             </th>
-                            <TableTileAzan text={props.prayerTimes.fajr} />
-                            <TableTileAzan text={props.prayerTimes.shurooq} />
-                            <TableTileAzan text={props.prayerTimes.zuhr} />
-                            <TableTileAzan text={props.prayerTimes.asr} />
-                            <TableTileAzan text={props.prayerTimes.magrib} />
-                            <TableTileAzan text={props.prayerTimes.isha} />
+                            <TableTileAzan text={props.prayerTimesOriginal.fajr} />
+                            <TableTileAzan text={props.prayerTimesOriginal.shurooq} />
+                            <TableTileAzan text={props.prayerTimesOriginal.zuhr} />
+                            <TableTileAzan text={props.prayerTimesOriginal.asr} />
+                            <TableTileAzan text={props.prayerTimesOriginal.magrib} />
+                            <TableTileAzan text={props.prayerTimesOriginal.isha} />
+                            <TableTileAzan text="1230" />
                         </tr>
                         <tr>
                             <th className="h5" scope="col">
@@ -265,6 +270,7 @@ function PrayerTimeTableHorizontal(props: PrayerTimeTableProps) {
                             <TableTileIqama text={props.prayerTimes.asr} />
                             <TableTileIqama text={props.prayerTimes.magrib} />
                             <TableTileIqama text={props.prayerTimes.isha} />
+                            <TableTileIqama text="1245" />
                         </tr>
                     </tbody>
                 </table>
@@ -306,33 +312,38 @@ function PrayerTimeTableVertical(props: PrayerTimeTableProps) {
                     <tbody>
                         <tr>
                             <TableHeaderTile text="Fajr" />
-                            <TableTileMobileAzan text={props.prayerTimes.fajr} />
+                            <TableTileMobileAzan text={props.prayerTimesOriginal.fajr} />
                             <TableTileMobileIqama text={props.prayerTimes.fajr} />
                         </tr>
                         <tr>
                             <TableHeaderTile text="Shurooq" />
-                            <TableTileMobileAzan text={props.prayerTimes.shurooq} />
+                            <TableTileMobileAzan text={props.prayerTimesOriginal.shurooq} />
                             <TableTileMobileIqama text={props.prayerTimes.shurooq} />
                         </tr>
                         <tr>
                             <TableHeaderTile text="Zuhr" />
-                            <TableTileMobileAzan text={props.prayerTimes.zuhr} />
+                            <TableTileMobileAzan text={props.prayerTimesOriginal.zuhr} />
                             <TableTileMobileIqama text={props.prayerTimes.zuhr} />
                         </tr>
                         <tr>
                             <TableHeaderTile text="Asr" />
-                            <TableTileMobileAzan text={props.prayerTimes.asr} />
+                            <TableTileMobileAzan text={props.prayerTimesOriginal.asr} />
                             <TableTileMobileIqama text={props.prayerTimes.asr} />
                         </tr>
                         <tr>
                             <TableHeaderTile text="Magrib" />
-                            <TableTileMobileAzan text={props.prayerTimes.magrib} />
+                            <TableTileMobileAzan text={props.prayerTimesOriginal.magrib} />
                             <TableTileMobileIqama text={props.prayerTimes.magrib} />
                         </tr>
                         <tr>
                             <TableHeaderTile text="Isha" />
-                            <TableTileMobileAzan text={props.prayerTimes.isha} />
+                            <TableTileMobileAzan text={props.prayerTimesOriginal.isha} />
                             <TableTileMobileIqama text={props.prayerTimes.isha} />
+                        </tr>
+                        <tr>
+                            <TableHeaderTile text="Jumma" />
+                            <TableTileMobileAzan text="1230" />
+                            <TableTileMobileIqama text="1245" />
                         </tr>
                     </tbody>
                 </table>
