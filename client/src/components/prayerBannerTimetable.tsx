@@ -7,7 +7,7 @@ export type prayerTimesType = {
     shurooq: string,
     zuhr: string,
     asr: string,
-    magrib: string,
+    maghrib: string,
     isha: string,
     jumma: string,
 };
@@ -25,15 +25,16 @@ export type PrayerTimeTypeOutput = {
 };
 
 function convertTo12HourFormat(time: string): [string, string] {
-    const hour = parseInt(time.substr(0, 2));
+    let hour = parseInt(time.substr(0, 2));
     const minute = time.substr(2, 3);
     let period = "AM";
 
     if (hour >= 12) {
+        hour = hour % 12;
         period = "PM";
     }
 
-    let formattedHour = hour % 12 === 0 ? "12" : (hour % 12).toString();
+    let formattedHour = hour === 0 ? "12" : hour.toString();
 
     return [`${formattedHour}:${minute}`, period];
 }
@@ -53,59 +54,28 @@ export default function PrayerBannerTimetable(props: TPrayerBannerTimetableProps
         shurooq: prayerTimesTemp.sunrise.replace(':', ''),
         zuhr: prayerTimesTemp.dhuhr.replace(':', ''),
         asr: prayerTimesTemp.asr.replace(':', ''),
-        magrib: prayerTimesTemp.maghrib.replace(':', ''),
+        maghrib: prayerTimesTemp.maghrib.replace(':', ''),
         isha: prayerTimesTemp.isha.replace(':', ''),
         jumma: "1300",
     };
 
     const prayerTimesOriginal = { ...prayerTimes };
 
-    // setting  times
-    if (props.prayerTimes.fajr.is_specific_time_active) {
-        prayerTimes.fajr = props.prayerTimes.fajr.specific_time_value;
-    } else if (props.prayerTimes.fajr.is_delay_in_minutes_active) {
-        const time = new Date();
-        time.setHours(parseInt(prayerTimes.fajr.substr(0, 2)));
-        time.setMinutes(parseInt(prayerTimes.fajr.substr(2, 2)) + props.prayerTimes.fajr.delay_in_minutes_value);
-        prayerTimes.fajr = time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }).replace(/:/g, '');
-    }
+    Object.keys(prayerTimes).forEach((key) => {
+        if (props.prayerTimes[key as keyof TPrayerTimePayload]?.is_specific_time_active) {
+            prayerTimes[key as keyof prayerTimesType] = props.prayerTimes[key as keyof TPrayerTimePayload].specific_time_value;
+        }
+        else if (props.prayerTimes[key as keyof TPrayerTimePayload]?.is_delay_in_minutes_active) {
+            const time = new Date();
+            time.setHours(parseInt(prayerTimes[key as keyof prayerTimesType].substr(0, 2)));
+            time.setMinutes(parseInt(prayerTimes[key as keyof prayerTimesType].substr(2, 2)) + props.prayerTimes[key as keyof TPrayerTimePayload].delay_in_minutes_value);
+            let hours = time.getHours().toString().padStart(2, '0');
+            let minutes = time.getMinutes().toString().padStart(2, '0');
+            prayerTimes[key as keyof prayerTimesType] = hours + minutes;
+        }
+    });
 
 
-    if (props.prayerTimes.zuhr.is_specific_time_active) {
-        prayerTimes.zuhr = props.prayerTimes.zuhr.specific_time_value;
-    } else if (props.prayerTimes.zuhr.is_delay_in_minutes_active) {
-        const time = new Date();
-        time.setHours(parseInt(prayerTimes.zuhr.substr(0, 2)));
-        time.setMinutes(parseInt(prayerTimes.zuhr.substr(2, 2)) + props.prayerTimes.zuhr.delay_in_minutes_value);
-        prayerTimes.zuhr = time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }).replace(/:/g, '');
-    }
-
-    if (props.prayerTimes.asr.is_specific_time_active) {
-        prayerTimes.asr = props.prayerTimes.asr.specific_time_value;
-    } else if (props.prayerTimes.asr.is_delay_in_minutes_active) {
-        const time = new Date();
-        time.setHours(parseInt(prayerTimes.asr.substr(0, 2)));
-        time.setMinutes(parseInt(prayerTimes.asr.substr(2, 2)) + props.prayerTimes.asr.delay_in_minutes_value);
-        prayerTimes.asr = time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }).replace(/:/g, '');
-    }
-
-    if (props.prayerTimes.maghrib.is_specific_time_active) {
-        prayerTimes.magrib = props.prayerTimes.maghrib.specific_time_value;
-    } else if (props.prayerTimes.maghrib.is_delay_in_minutes_active) {
-        const time = new Date();
-        time.setHours(parseInt(prayerTimes.magrib.substr(0, 2)));
-        time.setMinutes(parseInt(prayerTimes.magrib.substr(2, 2)) + props.prayerTimes.maghrib.delay_in_minutes_value);
-        prayerTimes.magrib = time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }).replace(/:/g, '');
-    }
-
-    if (props.prayerTimes.isha.is_specific_time_active) {
-        prayerTimes.isha = props.prayerTimes.isha.specific_time_value;
-    } else if (props.prayerTimes.isha.is_delay_in_minutes_active) {
-        const time = new Date();
-        time.setHours(parseInt(prayerTimes.isha.substr(0, 2)));
-        time.setMinutes(parseInt(prayerTimes.isha.substr(2, 2)) + props.prayerTimes.isha.delay_in_minutes_value);
-        prayerTimes.isha = time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }).replace(/:/g, '');
-    }
 
     return (
         <>
@@ -254,7 +224,7 @@ function PrayerTimeTableHorizontal(props: PrayerTimeTableProps) {
                             <TableTileAzan text={props.prayerTimesOriginal.shurooq} />
                             <TableTileAzan text={props.prayerTimesOriginal.zuhr} />
                             <TableTileAzan text={props.prayerTimesOriginal.asr} />
-                            <TableTileAzan text={props.prayerTimesOriginal.magrib} />
+                            <TableTileAzan text={props.prayerTimesOriginal.maghrib} />
                             <TableTileAzan text={props.prayerTimesOriginal.isha} />
                             <TableTileAzan text="1230" />
                         </tr>
@@ -268,7 +238,7 @@ function PrayerTimeTableHorizontal(props: PrayerTimeTableProps) {
                             <TableTileIqama text={props.prayerTimes.shurooq} />
                             <TableTileIqama text={props.prayerTimes.zuhr} />
                             <TableTileIqama text={props.prayerTimes.asr} />
-                            <TableTileIqama text={props.prayerTimes.magrib} />
+                            <TableTileIqama text={props.prayerTimes.maghrib} />
                             <TableTileIqama text={props.prayerTimes.isha} />
                             <TableTileIqama text="1245" />
                         </tr>
@@ -332,8 +302,8 @@ function PrayerTimeTableVertical(props: PrayerTimeTableProps) {
                         </tr>
                         <tr>
                             <TableHeaderTile text="Magrib" />
-                            <TableTileMobileAzan text={props.prayerTimesOriginal.magrib} />
-                            <TableTileMobileIqama text={props.prayerTimes.magrib} />
+                            <TableTileMobileAzan text={props.prayerTimesOriginal.maghrib} />
+                            <TableTileMobileIqama text={props.prayerTimes.maghrib} />
                         </tr>
                         <tr>
                             <TableHeaderTile text="Isha" />
