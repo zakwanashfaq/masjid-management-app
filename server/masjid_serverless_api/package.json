@@ -1,7 +1,7 @@
 {
   "name": "masjid-serverless-api",
   "description": "Api",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.188.0",
