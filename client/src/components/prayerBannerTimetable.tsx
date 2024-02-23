@@ -86,7 +86,7 @@ export default function PrayerBannerTimetable(props: TPrayerBannerTimetableProps
                 <PrayerTimeTableVertical prayerTimes={prayerTimes} prayerTimesOriginal={prayerTimesOriginal} />
             </div>
             <div className="fw-bold">
-                Note: Iqama times are when the congregation starts. Please come 5 minutes before the iqama time.
+                Note: Iqama times are when the congregation starts. Please come at least 5 minutes before the iqama time.
             </div>
         </>
     );
@@ -137,9 +137,9 @@ function TableTileMobileAzan(props: TableTileProps) {
     const [time, period] = convertTo12HourFormat(props.text);
     return (
         <th className="h1" scope="col">
-            <div className="m-1 rounded d-flex bg-primary bg-opacity-25 justify-content-center align-items-center" style={!props.sm ? { height: "80px" } : {}}>
+            <div className="m-1 rounded d-flex bg-primary bg-opacity-25 justify-content-center align-items-center py-1" >
                 <div className={" d-flex justify-content-center align-items-center"}>
-                    <span className="display-3">
+                    <span className="display-6">
                         {time}
                         <span className="h5">
                             {period}
@@ -155,9 +155,9 @@ function TableTileMobileIqama(props: TableTileProps) {
     const [time, period] = convertTo12HourFormat(props.text);
     return (
         <th className="h1" scope="col">
-            <div className="m-1 rounded d-flex bg-primary bg-opacity-75 text-light justify-content-center align-items-center" style={!props.sm ? { height: "80px" } : {}}>
+            <div className="m-1 rounded d-flex bg-primary bg-opacity-75 text-light justify-content-center align-items-center py-1">
                 <div className={" d-flex justify-content-center align-items-center"}>
-                    <span className="display-3 fw-bold">
+                    <span className="display-6 fw-bold">
                         {time}
                         <span className="h5">
                             {period}
@@ -173,9 +173,9 @@ function TableTileMobileShurooq(props: TableTileProps) {
     const [time, period] = convertTo12HourFormat(props.text);
     return (
         <th className="h1" scope="col" colSpan={2}>
-            <div className="m-1 rounded d-flex bg-primary bg-opacity-25 text-dark justify-content-center align-items-center" style={!props.sm ? { height: "80px" } : {}}>
+            <div className="m-1 rounded d-flex bg-primary bg-opacity-25 text-dark justify-content-center align-items-center py-1" >
                 <div className={" d-flex justify-content-center align-items-center"}>
-                    <span className="display-3 ">
+                    <span className="display-6">
                         {time}
                         <span className="h5">
                             {period}
@@ -214,6 +214,16 @@ function TableHeaderTile(props: TableHeaderTileProps) {
     return (
         <th className="h5" scope="col">
             <div className="m-1 rounded d-flex bg-primary bg-opacity-25 justify-content-center align-items-center" style={{ height: "80px" }}>
+                {props.text}
+            </div>
+        </th>
+    );
+}
+
+function TableHeaderTileMobile(props: TableHeaderTileProps) {
+    return (
+        <th className="h5" scope="col">
+            <div className="m-1 rounded d-flex bg-primary bg-opacity-25 justify-content-center align-items-center py-1" style={{ height: "41px" }}>
                 {props.text}
             </div>
         </th>
@@ -290,7 +300,7 @@ function PrayerTimeTableHorizontal(props: PrayerTimeTableProps) {
 function PrayerTimeTableVertical(props: PrayerTimeTableProps) {
     return (
         <>
-            <div className="mb-1 mt-4 d-flex justify-content-center bg-secondary bg-opacity-25 rounded fw-bold py-3">
+            <div className="mb-1 mt-2 d-flex justify-content-center bg-secondary bg-opacity-25 rounded fw-bold py-3">
                 Prayer Times for 10 Paton Street
             </div>
             <div className="row px-2 pb-4 d-flex flex-row justfy-content-center">
@@ -317,36 +327,36 @@ function PrayerTimeTableVertical(props: PrayerTimeTableProps) {
                     </thead>
                     <tbody>
                         <tr>
-                            <TableHeaderTile text="Fajr" />
+                            <TableHeaderTileMobile text="Fajr" />
                             <TableTileMobileAzan text={props.prayerTimesOriginal.fajr} />
                             <TableTileMobileIqama text={props.prayerTimes.fajr} />
                         </tr>
                         <tr>
-                            <TableHeaderTile text="Shurooq" />
+                            <TableHeaderTileMobile text="Shurooq" />
                             <TableTileMobileShurooq text={props.prayerTimesOriginal.shurooq} />
                         </tr>
                         <tr>
-                            <TableHeaderTile text="Zuhr" />
+                            <TableHeaderTileMobile text="Zuhr" />
                             <TableTileMobileAzan text={props.prayerTimesOriginal.zuhr} />
                             <TableTileMobileIqama text={props.prayerTimes.zuhr} />
                         </tr>
                         <tr>
-                            <TableHeaderTile text="Asr" />
+                            <TableHeaderTileMobile text="Asr" />
                             <TableTileMobileAzan text={props.prayerTimesOriginal.asr} />
                             <TableTileMobileIqama text={props.prayerTimes.asr} />
                         </tr>
                         <tr>
-                            <TableHeaderTile text="Magrib" />
+                            <TableHeaderTileMobile text="Magrib" />
                             <TableTileMobileAzan text={props.prayerTimesOriginal.maghrib} />
                             <TableTileMobileIqama text={props.prayerTimes.maghrib} />
                         </tr>
                         <tr>
-                            <TableHeaderTile text="Isha" />
+                            <TableHeaderTileMobile text="Isha" />
                             <TableTileMobileAzan text={props.prayerTimesOriginal.isha} />
                             <TableTileMobileIqama text={props.prayerTimes.isha} />
                         </tr>
                         <tr>
-                            <TableHeaderTile text="Jumma" />
+                            <TableHeaderTileMobile text="Jumma" />
                             <TableTileMobileAzan text="1230" />
                             <TableTileMobileIqama text="1245" />
                         </tr>
