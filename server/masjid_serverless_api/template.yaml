@@ -17,8 +17,7 @@ Resources:
       - x86_64
       MemorySize: 128
       Timeout: 30
-      Description: A simple example includes a HTTP get method to get all items from
-        a DynamoDB table.
+      Description: Saving prayer times as a JSON object in DynamoDB.
       Events:
         Api:
           Type: Api
@@ -35,8 +34,7 @@ Resources:
       - x86_64
       MemorySize: 128
       Timeout: 30
-      Description: A simple example includes a HTTP get method to get all items from
-        a DynamoDB table.
+      Description: Fetching landing page data from DynamoDB.
       Events:
         Api:
           Type: Api

@@ -1,3 +1,5 @@
+//@ts-ignore
+import logo from '../assets/icnl-logo-white-bg.jpg'
 
 export default function Navbar() {
     return (
@@ -14,12 +16,18 @@ export default function Navbar() {
             </div>
             <nav className="navbar py-4">
                 <div className="container-xl">
-                    <div className="navbar-brand mb-0 h1 text-wrap">
-                        <div className="d-md-none">
-                            ICNL
-                        </div>
-                        <div className="d-none d-md-block fs-3">
-                            Islamic Center of Newfoundland
+                    <div className="navbar-brand d-flex align-items-center mb-0 h1 text-wrap">
+                        <img src={logo} alt="" height='80px' />
+                        <div className='d-flex ps-3 flex-column align-items-start'>
+                            <span className='fs-2 text-primary'>
+                                ICNL
+                            </span>
+                            {/* <div className="d-md-none">
+                                ICNL
+                            </div> */}
+                            <div className="d-none d-md-block fs-6">
+                                Islamic Center of Newfoundland
+                            </div>
                         </div>
                     </div>
                     <a 
