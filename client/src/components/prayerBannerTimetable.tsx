@@ -223,7 +223,7 @@ function TableHeaderTile(props: TableHeaderTileProps) {
 function TableHeaderTileMobile(props: TableHeaderTileProps) {
     return (
         <th className="h5" scope="col">
-            <div className="m-1 rounded d-flex bg-primary bg-opacity-25 justify-content-center align-items-center py-1" style={{ height: "41px" }}>
+            <div className="m-1 rounded d-flex bg-primary bg-opacity-25 justify-content-center align-items-center py-1" style={{ height: "3rem" }}>
                 {props.text}
             </div>
         </th>
