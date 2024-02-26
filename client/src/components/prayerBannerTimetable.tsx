@@ -136,12 +136,12 @@ function TableTileAzan(props: TableTileProps) {
 function TableTileMobileAzan(props: TableTileProps) {
     const [time, period] = convertTo12HourFormat(props.text);
     return (
-        <th className="h1" scope="col">
+        <th className="h5" scope="col">
             <div className="m-1 rounded d-flex bg-primary bg-opacity-25 justify-content-center align-items-center py-1" >
                 <div className={" d-flex justify-content-center align-items-center"}>
-                    <span className="display-6">
+                    <span className="">
                         {time}
-                        <span className="h5">
+                        <span className="h6">
                             {period}
                         </span>
                     </span>
@@ -154,12 +154,12 @@ function TableTileMobileAzan(props: TableTileProps) {
 function TableTileMobileIqama(props: TableTileProps) {
     const [time, period] = convertTo12HourFormat(props.text);
     return (
-        <th className="h1" scope="col">
+        <th className="h5" scope="col">
             <div className="m-1 rounded d-flex bg-primary bg-opacity-75 text-light justify-content-center align-items-center py-1">
                 <div className={" d-flex justify-content-center align-items-center"}>
-                    <span className="display-6 fw-bold">
+                    <span className="fw-bold">
                         {time}
-                        <span className="h5">
+                        <span className="h6">
                             {period}
                         </span>
                     </span>
@@ -172,12 +172,12 @@ function TableTileMobileIqama(props: TableTileProps) {
 function TableTileMobileShurooq(props: TableTileProps) {
     const [time, period] = convertTo12HourFormat(props.text);
     return (
-        <th className="h1" scope="col" colSpan={2}>
+        <th className="h5" scope="col" colSpan={2}>
             <div className="m-1 rounded d-flex bg-primary bg-opacity-25 text-dark justify-content-center align-items-center py-1" >
                 <div className={" d-flex justify-content-center align-items-center"}>
-                    <span className="display-6">
+                    <span className="">
                         {time}
-                        <span className="h5">
+                        <span className="h6">
                             {period}
                         </span>
                     </span>
@@ -222,8 +222,8 @@ function TableHeaderTile(props: TableHeaderTileProps) {
 
 function TableHeaderTileMobile(props: TableHeaderTileProps) {
     return (
-        <th className="h5" scope="col">
-            <div className="m-1 rounded d-flex bg-primary bg-opacity-25 justify-content-center align-items-center py-1" style={{ height: "3rem" }}>
+        <th className="h6" scope="col">
+            <div className="m-1 rounded d-flex bg-primary bg-opacity-25 justify-content-center align-items-center" style={{ height: "2rem" }}>
                 {props.text}
             </div>
         </th>
@@ -298,9 +298,10 @@ function PrayerTimeTableHorizontal(props: PrayerTimeTableProps) {
 
 
 function PrayerTimeTableVertical(props: PrayerTimeTableProps) {
+    const HEADER_HEIGHT = '35px';
     return (
         <>
-            <div className="mb-1 mt-2 d-flex justify-content-center bg-secondary bg-opacity-25 rounded fw-bold py-3">
+            <div className="mb-1 mt-2 d-flex justify-content-center bg-secondary bg-opacity-25 rounded fw-bold py-1">
                 Prayer Times for 10 Paton Street
             </div>
             <div className="row px-2 pb-4 d-flex flex-row justfy-content-center">
@@ -308,18 +309,18 @@ function PrayerTimeTableVertical(props: PrayerTimeTableProps) {
                     <thead>
                         <tr>
                             <th className="h2" scope="col">
-                                <div className="m-1 rounded d-flex bg-secondary bg-opacity-25 justify-content-center align-items-center" style={{ height: "50px" }}>
+                                <div className="m-1 rounded d-flex bg-secondary bg-opacity-25 justify-content-center align-items-center" style={{ height: HEADER_HEIGHT }}>
 
                                 </div>
                             </th>
 
-                            <th className="h5" scope="col">
-                                <div className="m-1 rounded px-2 d-flex bg-secondary bg-opacity-25 justify-content-center align-items-center" style={{ height: "50px" }}>
+                            <th className="h6" scope="col">
+                                <div className="m-1 rounded px-2 d-flex bg-secondary bg-opacity-25 justify-content-center align-items-center" style={{ height: HEADER_HEIGHT }}>
                                     Azzan
                                 </div>
                             </th>
-                            <th className="h5" scope="col">
-                                <div className="m-1 rounded px-2 d-flex bg-secondary bg-opacity-25 justify-content-center align-items-center" style={{ height: "50px" }}>
+                            <th className="h6" scope="col">
+                                <div className="m-1 rounded px-2 d-flex bg-secondary bg-opacity-25 justify-content-center align-items-center" style={{ height: HEADER_HEIGHT }}>
                                     Iqama
                                 </div>
                             </th>

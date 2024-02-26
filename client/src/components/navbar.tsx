@@ -22,16 +22,18 @@ export default function Navbar() {
                             <span className='fs-2 text-primary'>
                                 ICNL
                             </span>
-                            {/* <div className="d-md-none">
-                                ICNL
-                            </div> */}
-                            <div className="d-none d-md-block fs-6">
+                            <div className="fs-6">
                                 Islamic Center of Newfoundland
                             </div>
                         </div>
                     </div>
                     <a 
-                        className="btn btn-success" 
+                        className="btn btn-primary d-none d-md-block" 
+                        type="button"
+                        href="https://donate.stripe.com/bIY3eda7W1Kx13yaEE"
+                    >DONATE</a>
+                    <a 
+                        className="btn btn-primary w-100 d-block d-md-none" 
                         type="button"
                         href="https://donate.stripe.com/bIY3eda7W1Kx13yaEE"
                     >DONATE</a>
