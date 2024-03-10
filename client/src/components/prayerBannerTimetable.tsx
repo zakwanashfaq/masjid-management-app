@@ -272,7 +272,7 @@ function PrayerTimeTableHorizontal(props: PrayerTimeTableProps) {
                             <TableTileAzan text={props.prayerTimesOriginal.asr} />
                             <TableTileAzan text={props.prayerTimesOriginal.maghrib} />
                             <TableTileAzan text={props.prayerTimesOriginal.isha} />
-                            <TableTileAzan text="1230" />
+                            <TableTileAzan text={props.prayerTimesOriginal.zuhr} />
                         </tr>
                         <tr>
                             <th className="h5" scope="col">
@@ -286,7 +286,7 @@ function PrayerTimeTableHorizontal(props: PrayerTimeTableProps) {
                             <TableTileIqama text={props.prayerTimes.asr} />
                             <TableTileIqama text={props.prayerTimes.maghrib} />
                             <TableTileIqama text={props.prayerTimes.isha} />
-                            <TableTileIqama text="1245" />
+                            <TableTileIqama text="1330" />
                         </tr>
                     </tbody>
                 </table>
@@ -358,8 +358,8 @@ function PrayerTimeTableVertical(props: PrayerTimeTableProps) {
                         </tr>
                         <tr>
                             <TableHeaderTileMobile text="Jumma" />
-                            <TableTileMobileAzan text="1230" />
-                            <TableTileMobileIqama text="1245" />
+                            <TableTileMobileAzan text={props.prayerTimesOriginal.zuhr} />
+                            <TableTileMobileIqama text="1330" />
                         </tr>
                     </tbody>
                 </table>
