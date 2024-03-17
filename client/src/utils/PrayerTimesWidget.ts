@@ -16,11 +16,13 @@ export type TPrayerTimePayload = {
 }
 
 export enum EPrayerNames {
-    FAJR = 'fajr',
-    ZUHR = 'zuhr',
-    ASR = 'asr',
-    MAGHRIB = 'maghrib',
-    ISHA = 'isha'
+    FAJR = "fajr",
+    SHUROOQ = "shurooq",
+    ZUHR = "zuhr",
+    ASR = "asr",
+    MAGHRIB = "maghrib",
+    ISHA = "isha",
+    JUMMA = "jumma",
 }
 
 class PrayerTime {
