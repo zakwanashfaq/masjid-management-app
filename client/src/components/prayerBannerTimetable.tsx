@@ -1,5 +1,6 @@
 import PrayTimes from "../utils/PrayerTimes";
 import { EPrayerNames, TPrayerTimePayload } from "../utils/PrayerTimesWidget";
+import React, { useState, useEffect } from 'react';
 
 
 export type prayerTimesType = {
@@ -75,27 +76,38 @@ export default function PrayerBannerTimetable(props: TPrayerBannerTimetableProps
         }
     });
 
-    const timeNow = new Date().getHours() * 100 + new Date().getMinutes();
-    let highlight = "";
+    const [timeNow, setTimeNow] = useState(new Date().getHours() * 100 + new Date().getMinutes());
+    const [highlight, setHighlight] = useState("");
 
-    if (timeNow >= parseInt(prayerTimesOriginal.fajr) && timeNow < parseInt(prayerTimesOriginal.shurooq)) {
-        highlight = EPrayerNames.FAJR;
-    }
-    else if (timeNow >= parseInt(prayerTimesOriginal.shurooq) && timeNow < parseInt(prayerTimesOriginal.zuhr)) {
-        highlight = EPrayerNames.SHUROOQ;
-    }
-    else if (timeNow >= parseInt(prayerTimesOriginal.zuhr) && timeNow < parseInt(prayerTimesOriginal.asr)) {
-        highlight = EPrayerNames.ZUHR;
-    }
-    else if (timeNow >= parseInt(prayerTimesOriginal.asr) && timeNow < parseInt(prayerTimesOriginal.maghrib)) {
-        highlight = EPrayerNames.ASR;
-    }
-    else if (timeNow >= parseInt(prayerTimesOriginal.maghrib) && timeNow < parseInt(prayerTimesOriginal.isha)) {
-        highlight = EPrayerNames.MAGHRIB
-    }
-    else if (timeNow >= parseInt(prayerTimesOriginal.isha) ) {
-        highlight = EPrayerNames.ISHA;
-    }
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTimeNow(new Date().getHours() * 100 + new Date().getMinutes());
+        }, 60000); // Update timeNow every minute
+
+        return () => clearInterval(interval); // Clear interval on component unmount
+    }, []);
+
+    useEffect(() => {
+        if (timeNow >= parseInt(prayerTimesOriginal.fajr) && timeNow < parseInt(prayerTimesOriginal.shurooq)) {
+            setHighlight(EPrayerNames.FAJR);
+        }
+        else if (timeNow >= parseInt(prayerTimesOriginal.shurooq) && timeNow < parseInt(prayerTimesOriginal.zuhr)) {
+            setHighlight(EPrayerNames.SHUROOQ);
+        }
+        else if (timeNow >= parseInt(prayerTimesOriginal.zuhr) && timeNow < parseInt(prayerTimesOriginal.asr)) {
+            setHighlight(EPrayerNames.ZUHR);
+        }
+        else if (timeNow >= parseInt(prayerTimesOriginal.asr) && timeNow < parseInt(prayerTimesOriginal.maghrib)) {
+            setHighlight(EPrayerNames.ASR);
+        }
+        else if (timeNow >= parseInt(prayerTimesOriginal.maghrib) && timeNow < parseInt(prayerTimesOriginal.isha)) {
+            setHighlight(EPrayerNames.MAGHRIB);
+        }
+        else if (timeNow >= parseInt(prayerTimesOriginal.isha)) {
+            setHighlight(EPrayerNames.ISHA);
+        }
+    }, [timeNow, prayerTimesOriginal]);
+
 
 
     return (
