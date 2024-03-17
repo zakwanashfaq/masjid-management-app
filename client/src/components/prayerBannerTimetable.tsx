@@ -75,7 +75,7 @@ export default function PrayerBannerTimetable(props: TPrayerBannerTimetableProps
         }
     });
 
-    const timeNow = 2000; // new Date().getHours() * 100 + new Date().getMinutes();
+    const timeNow = new Date().getHours() * 100 + new Date().getMinutes();
     let highlight = "";
 
     if (timeNow >= parseInt(prayerTimesOriginal.fajr) && timeNow < parseInt(prayerTimesOriginal.shurooq)) {
@@ -93,7 +93,7 @@ export default function PrayerBannerTimetable(props: TPrayerBannerTimetableProps
     else if (timeNow >= parseInt(prayerTimesOriginal.maghrib) && timeNow < parseInt(prayerTimesOriginal.isha)) {
         highlight = EPrayerNames.MAGHRIB
     }
-    else if (timeNow >= parseInt(prayerTimesOriginal.isha) && timeNow < parseInt(prayerTimesOriginal.jumma)) {
+    else if (timeNow >= parseInt(prayerTimesOriginal.isha) ) {
         highlight = EPrayerNames.ISHA;
     }
 
