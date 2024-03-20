@@ -36,7 +36,7 @@ export default function Navbar() {
                         </div>
                     </div>
                     <div className=''>
-                        <div className='row'>
+                        <div className='row g-2'>
                             <div className='col-12 col-md-6 mb-2 mb-md-0'>
                                 <div className='fw-bold btn btn-secondary h-100 w-100' onClick={copyEmailToClipboard}>
                                     Donate by interac at <a className='text-light'>{interacEmail}</a>
@@ -44,7 +44,7 @@ export default function Navbar() {
                             </div>
                             <div className='col-12 col-md-6'>
                                 <div className='fw-bold btn btn-primary h-100 d-flex justify-content-center align-items-center'>
-                                    <a className='text-white' href='https://donate.stripe.com/bIY3eda7W1Kx13yaEE' target='_blank'>Donate online</a>
+                                    <a className='text-white' href='https://donate.stripe.com/bIY3eda7W1Kx13yaEE' target='_blank'>Donate by card</a>
                                 </div>
                             </div>
                         </div>
