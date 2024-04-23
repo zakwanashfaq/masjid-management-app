@@ -25,7 +25,7 @@ export default function Navbar() {
             <nav className="navbar py-4">
                 <div className="container-xl">
                     <div className="navbar-brand d-flex align-items-center mb-0 h1 text-wrap">
-                        <img src={logo} alt="" height='80px' />
+                        {/* <img src={logo} alt="" height='80px' /> */}
                         <div className='d-flex ps-3 flex-column align-items-start'>
                             <span className='fs-2 text-primary'>
                                 ICNL
