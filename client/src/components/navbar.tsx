@@ -4,10 +4,12 @@ import logo from '../assets/icnl-logo-white-bg.jpg'
 import { useState } from 'react';
 
 export default function Navbar() {
-    const interacEmail = "icnmosque@gmail.com";
-    const copyEmailToClipboard = () => {
-        navigator.clipboard.writeText(interacEmail);
-        alert('Email copied to clipboard');
+    const handleDonateClick = () => {
+        window.location.href = "/donate";
+    };
+
+    const handleLogoClick = () => {
+        window.location.href = "/";
     };
 
     return (
@@ -24,9 +26,9 @@ export default function Navbar() {
             </div>
             <nav className="navbar py-4">
                 <div className="container-xl">
-                    <div className="navbar-brand d-flex align-items-center mb-0 h1 text-wrap">
-                        {/* <img src={logo} alt="" height='80px' /> */}
-                        <div className='d-flex ps-3 flex-column align-items-start'>
+                    <div className="navbar-brand d-flex align-items-center mb-0 h1 text-wrap" onClick={handleLogoClick}>
+                        <img src={logo.src} alt="" height='80px' />
+                        <div className='d-flex ms-3 flex-column align-items-start'>
                             <span className='fs-2 text-primary'>
                                 ICNL
                             </span>
@@ -37,16 +39,9 @@ export default function Navbar() {
                     </div>
                     <div className=''>
                         <div className='row g-2'>
-                            <div className='col-12 col-md-6 mb-2 mb-md-0'>
-                                <div className='fw-bold btn btn-secondary h-100 w-100' onClick={copyEmailToClipboard}>
-                                    Donate by interac at <a className='text-light'>{interacEmail}</a>
+                                <div className='fw-bold btn btn-md btn-success h-100 w-100' onClick={handleDonateClick}>
+                                    Donate
                                 </div>
-                            </div>
-                            <div className='col-12 col-md-6'>
-                                <div className='fw-bold btn btn-primary h-100 d-flex justify-content-center align-items-center'>
-                                    <a className='text-white' href='https://donate.stripe.com/bIY3eda7W1Kx13yaEE' target='_blank'>Donate by card</a>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

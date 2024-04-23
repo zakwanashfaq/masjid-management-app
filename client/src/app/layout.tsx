@@ -22,7 +22,7 @@ export default function RootLayout({
       <body>
         <div className='p-0 m-0' style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
           <Navbar />
-          <div className='container-lg flex-grow-1'>
+          <div className='container-xl flex-grow-1'>
            <div id="root">{children}</div>
           </div>
           <Footer />
