@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './page_templates/homePage';
-import LoginPage from './app/login/page';
+import LoginPage from './app/(authenticated)/login/page';
 import AdminPage from './page_templates/adminPage';
 
 const root = ReactDOM.createRoot(
