@@ -2,8 +2,8 @@
 
 import Footer from "src/components/footer"
 import Navbar from "src/components/navbar"
-import '../scss/custom.scss';
-import logo from '../assets/icnl-logo-no-bg.jpg'
+import '../../scss/custom.scss';
+import logo from '../../assets/icnl-logo-no-bg.jpg'
 
 export default function RootLayout({
   children,
