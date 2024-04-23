@@ -1,8 +1,8 @@
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomePage from './pages/homePage';
-import LoginPage from './pages/loginPage';
-import AdminPage from './pages/adminPage';
+import HomePage from './page_templates/homePage';
+import LoginPage from './app/login/page';
+import AdminPage from './page_templates/adminPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
