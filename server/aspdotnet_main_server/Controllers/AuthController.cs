@@ -39,7 +39,7 @@ public class AuthController: ControllerBase {
             var Sectoken = new JwtSecurityToken(_config["Jwt:Issuer"],
               _config["Jwt:Issuer"],
               claims: claims,
-              expires: DateTime.Now.AddMinutes(1),
+              expires: DateTime.Now.AddMinutes(120),
               signingCredentials: credentials);
 
             var token =  new JwtSecurityTokenHandler().WriteToken(Sectoken);

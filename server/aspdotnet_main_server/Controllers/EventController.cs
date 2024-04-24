@@ -25,12 +25,16 @@ public class EventController : ControllerBase
         return Ok(events);
     }
 
-    // Gets 25 events from the given order
-    [HttpGet]
+    // Gets 25 events starting from the given id
+    [HttpPost]
     [Route("get25Events")]
-    public ActionResult<string> Get25Event([FromBody] Get25EventRequestDto request)
+    public async Task<ActionResult<IEnumerable<EventModel>>> Get25EventRequest([FromBody] Get25EventRequestDto request)
     {
-        return Ok("Event is on 25th December 2021");
+        var events = await _context.EventModels
+            .Where(e => e.Id >= request.startId)
+            .Take(25)
+            .ToListAsync();
+        return Ok(events);
     }
 
 
@@ -40,7 +44,6 @@ public class EventController : ControllerBase
     [Route("addEvent")]
     public async Task<ActionResult<string>> SetEvent([FromBody] AddEventRequestDto request)
     {
-        DateTime currentDate = DateTime.UtcNow;
         // Create a new event
         var newEvent = new EventModel
         {
@@ -58,7 +61,7 @@ public class EventController : ControllerBase
         // Save the changes to the database
         await _context.SaveChangesAsync();
 
-        return Ok($"Event date set to {currentDate}.");
+        return Ok($"Event date set to {newEvent.eventDate.ToString()}.");
     }
 }
 
@@ -69,12 +72,10 @@ public class AddEventRequestDto
     public DateTime eventDate { get; set; }
     public string eventName { get; set; }
     public string eventDescription { get; set; }
-    public string createdBy { get; set; }
-    public DateTime createdOn { get; set; }
 
 }
 
 public class Get25EventRequestDto
 {
-    public DateTime startDate { get; set; }
+    public int startId { get; set; }
 }
