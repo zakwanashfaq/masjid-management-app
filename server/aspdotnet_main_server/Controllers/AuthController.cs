@@ -48,7 +48,7 @@ public class AuthController: ControllerBase {
             });
         }
 
-        return Unauthorized("Invalid Credentials");
+        return Unauthorized(new {messgae= "Invalid Credentials"});
     }
 
 }
