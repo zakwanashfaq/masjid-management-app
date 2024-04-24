@@ -25,6 +25,51 @@ public class EventController : ControllerBase
         return Ok(events);
     }
 
+    // Todo: verify this api works as expected
+    [HttpPut]
+    [Authorize]
+    [Route("updateEvent")]
+    public async Task<ActionResult<string>> UpdateEvent([FromBody] EventModel updatedEvent)
+    {
+        var existingEvent = await _context.EventModels.FindAsync(updatedEvent.Id);
+        if (existingEvent == null)
+        {
+            return NotFound("Event not found");
+        }
+
+        // Update the properties of the existing event
+        existingEvent.eventDateTime = updatedEvent.eventDateTime;
+        existingEvent.eventName = updatedEvent.eventName;
+        existingEvent.eventDescription = updatedEvent.eventDescription;
+        existingEvent.createdBy = updatedEvent.createdBy;
+
+        // Save the changes to the database
+        await _context.SaveChangesAsync();
+
+        return Ok($"Event with id {updatedEvent.Id} updated successfully.");
+    }
+
+    // Todo: verify this api works as expected
+    [HttpDelete]
+    [Authorize]
+    [Route("deleteEvent")]
+    public async Task<ActionResult<string>> DeleteEvent([FromBody] int eventId)
+    {
+        var existingEvent = await _context.EventModels.FindAsync(eventId);
+        if (existingEvent == null)
+        {
+            return NotFound("Event not found");
+        }
+
+        // Remove the event from the EventModels DbSet
+        _context.EventModels.Remove(existingEvent);
+
+        // Save the changes to the database
+        await _context.SaveChangesAsync();
+
+        return Ok($"Event with id {eventId} deleted successfully.");
+    }
+
     // Gets 25 events starting from the given id
     [HttpPost]
     [Route("get25Events")]
@@ -48,7 +93,7 @@ public class EventController : ControllerBase
         var newEvent = new EventModel
         {
             // Set the properties of the event here
-            eventDate = request.eventDate.ToUniversalTime(), // convert eventDate to UTC
+            eventDateTime = request.eventDateTime.ToUniversalTime(), // convert eventDate to UTC
             eventName = request.eventName,
             eventDescription = request.eventDescription,
             createdBy = "User", // replace with actual user
@@ -61,7 +106,7 @@ public class EventController : ControllerBase
         // Save the changes to the database
         await _context.SaveChangesAsync();
 
-        return Ok($"Event date set to {newEvent.eventDate.ToString()}.");
+        return Ok($"Event date set to {newEvent.eventDateTime.ToString()}.");
     }
 }
 
@@ -69,7 +114,7 @@ public class EventController : ControllerBase
 // controller specific DTO's
 public class AddEventRequestDto
 {
-    public DateTime eventDate { get; set; }
+    public DateTime eventDateTime { get; set; }
     public string eventName { get; set; }
     public string eventDescription { get; set; }
 
