@@ -81,7 +81,7 @@ function AdjustPrayerTimeWidget_input(props: TAdjustPrayerTimeWidgetProps) {
 }
 
 
-function AdjustPrayerTimeWidget() {
+export function AdjustPrayerTimeWidget() {
 
     const prayerTimeManager = new PrayerTimesManager();
     
