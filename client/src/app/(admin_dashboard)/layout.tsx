@@ -8,7 +8,7 @@ import { changeNav } from '../../reduxStore/slices/adminDashboardSlice';
 
 export default function DashboardLayout({ children, }: { children: React.ReactNode }) {
     return (
-        <html lang="en">
+        <>
             <Provider store={store}>
                 <>
                     <head>
@@ -30,7 +30,7 @@ export default function DashboardLayout({ children, }: { children: React.ReactNo
                     </body>
                 </>
             </Provider>
-        </html>
+        </>
     )
 }
 
