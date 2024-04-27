@@ -28,7 +28,6 @@ export default function Page() {
         fetch('https://k80pnjbrb8.execute-api.us-east-1.amazonaws.com/Prod/landingPageData')
             .then(response => response.json())  // Parse the response as JSON
             .then(data => {
-                console.log(data);
                 setLandingPageData(data.Item);
             })
             .catch(error => console.error('An error occurred:\n', error));

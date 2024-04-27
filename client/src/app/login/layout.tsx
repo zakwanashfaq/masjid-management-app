@@ -8,7 +8,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <>
       <head>
         <meta charSet="UTF-8" />
         <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
@@ -19,6 +19,6 @@ export default function RootLayout({
       <body>
            <div id="root">{children}</div>        
       </body>
-    </html>
+    </>
   )
 }
