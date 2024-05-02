@@ -1,9 +1,9 @@
 'use client';
 
 import { useSelector } from "react-redux";
-import PrayerTimesPage from "./prayerTimeContainer";
-import HomeContainer from "./homeContainer";
-import EventsContainer from "./eventsContainer";
+import PrayerTimesPage from "./dashboard/prayerTimeContainer";
+import HomeContainer from "./dashboard/homeContainer";
+import EventsContainer from "./dashboard/eventsContainer";
 
 type TAdminDashboardState = {
     adminDashState: {
