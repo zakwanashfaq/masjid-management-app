@@ -1,4 +1,4 @@
-import 'bootstrap/dist/js/bootstrap.bundle.min';
+
 import { useEffect, useState } from 'react';
 import PrayerTimesManager, { EPrayerNames } from '../utils/PrayerTimesWidget';
 
