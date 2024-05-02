@@ -9,7 +9,7 @@ export default function LoginPage() {
     // add firebase or aws cognito auth here
     const handleSignIn = () => {
         console.log('SignIn clicked');
-        router.push('/dashboard');
+        router.push('/admin/dashboard');
     }
     return (
         <>
