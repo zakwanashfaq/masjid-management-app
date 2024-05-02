@@ -1,10 +1,15 @@
+'use client';
+
 import '../../scss/custom.scss';
 import logo from '../../assets/icnl-logo-white-bg.jpg'
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
+    const router = useRouter();
     // add firebase or aws cognito auth here
     const handleSignIn = () => {
-
+        console.log('SignIn clicked');
+        router.push('/dashboard');
     }
     return (
         <>
@@ -25,7 +30,7 @@ export default function LoginPage() {
                                 <input type="password" className="form-control" id="floatingPassword" placeholder="Password" />
                                 <label htmlFor="floatingPassword">Password</label>
                             </div>
-                            <button className="btn btn-primary px-5 py-2" type="submit">Sign in</button>
+                            <button className="btn btn-primary px-5 py-2" type="submit" onClick={handleSignIn}>Sign in</button>
                             <p className="mt-5 mb-3 text-body-secondary">Islamic Center of Newfoundland and Labrador</p>
                         </form>
                     </main>

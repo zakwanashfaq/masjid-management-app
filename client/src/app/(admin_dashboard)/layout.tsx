@@ -5,6 +5,7 @@ import logo from '../../assets/icnl-logo-white-bg.jpg'
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import store from '../../reduxStore/adminStore'
 import { changeNav } from '../../reduxStore/slices/adminDashboardSlice';
+import { useRouter } from 'next/navigation';
 
 export default function DashboardLayout({ children, }: { children: React.ReactNode }) {
     return (
@@ -37,6 +38,12 @@ export default function DashboardLayout({ children, }: { children: React.ReactNo
 function Sidebar() {
     const dispatch = useDispatch();
     const vari = useSelector((state: any) => state.adminDashState.selected_nav);
+    const router = useRouter();
+
+    const handleLogoutClick = () => {
+        console.log('Logout clicked');
+        router.push('/login');
+    }
     return (
         <>
             <div className="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style={{ width: "280px" }}>
@@ -77,7 +84,7 @@ function Sidebar() {
                 </ul>
                 <hr />
                 <div className="dropdown">
-                    <button className='btn btn-danger w-100'>Logout</button>
+                    <button className='btn btn-danger w-100' onClick={handleLogoutClick}>Logout</button>
                 </div>
             </div>
         </>
