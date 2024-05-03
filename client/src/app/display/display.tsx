@@ -7,6 +7,7 @@ type TDisplayProps = {
 }
 
 export default function Display(props: TDisplayProps) {
+    console.log('Display', props);
     return (
         <div className="vh-100 d-flex flex-column">
             <ClockWidget />

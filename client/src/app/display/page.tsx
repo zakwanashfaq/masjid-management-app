@@ -20,7 +20,7 @@ export default function Page() {
         <>
             {
                 landingPageData ?
-                    <Display prayerTimes={landingPageData} />
+                    <Display prayerTimes={landingPageData.prayerTimes} />
                     :
                     <LoadingScreen />
             }
