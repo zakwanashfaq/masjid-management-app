@@ -12,9 +12,9 @@ namespace aspdotnet_main_server.Controllers
 
         [HttpGet]
         [Route("getPrayerTime")]
-        public ActionResult<string> GetPrayerTime()
+        public ActionResult GetPrayerTime()
         {
-            return Ok("Prayer time is at 5:00 AM");
+            return Ok(new { message = "Prayer time is at 5:00 AM"});
         }
 
         [Authorize]
