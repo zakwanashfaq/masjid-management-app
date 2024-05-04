@@ -11,7 +11,9 @@ export default function Display(props: TDisplayProps) {
     console.log('Display', props);
     return (
         <div className="vh-100 d-flex flex-column">
-            <ClockWidget />
+            <div className="w-100 h-100">
+                <ClockWidget />
+            </div>
             <div className='mx-3'>
                 <PrayerBannerTimetable prayerTimes={props.prayerTimes} />
             </div>
@@ -43,8 +45,8 @@ function ClockWidget() {
     }
     setInterval(UpdateTime)
     return (
-        <div className="bg-dark d-flex flex-grow-1 align-items-center justify-content-center flex-column">
-            <div className="display-6 d-flex align-items-center text-light">
+        <div className="bg-dark d-flex flex-grow-1 align-items-center justify-content-center h-100 flex-column">
+            <div className="fs-3 d-flex align-items-center text-light">
                 <img src={logo.src} alt="Clock" className="pe-3" style={colorFilter} />
                 Islamic Center of Newfoundland
             </div>
