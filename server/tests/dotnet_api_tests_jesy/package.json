@@ -1,0 +1,14 @@
+{
+  "name": "dotnet_api_tests_jesy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "set API=http://localhost:5131&& jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^29.7.0"
+  }
+}
