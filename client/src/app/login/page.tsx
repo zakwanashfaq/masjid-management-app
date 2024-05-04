@@ -2,12 +2,10 @@
 
 import '../../scss/custom.scss';
 import logo from '../../assets/icnl-logo-white-bg.jpg'
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 
 export default function LoginPage() {
-    const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -16,7 +14,7 @@ export default function LoginPage() {
         alert('Sign in clicked with ' + email + ' and ' + password + '!');
         console.log('Email:', email);
         console.log('Password:', password);
-        router.push('/admin');
+        window.location.href = "/admin";
     }
 
     return (

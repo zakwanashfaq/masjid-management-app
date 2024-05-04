@@ -1,15 +1,14 @@
 {
-  "name": "dotnet_api_tests",
+  "name": "dotnet_api_tests_jesy",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "set API=http://localhost:5131&& jest"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cypress": "^13.8.0"
+    "jest": "^29.7.0"
   }
 }

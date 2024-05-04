@@ -1,6 +1,7 @@
 import PrayerBannerTimetable from "src/components/prayerBannerTimetable";
 import { TPrayerTimePayload } from "src/utils/PrayerTimesWidget";
 import { useState } from "react";
+import logo from '../../assets/icnl-logo-white-bg.jpg';
 
 type TDisplayProps = {
     prayerTimes: TPrayerTimePayload
@@ -11,7 +12,7 @@ export default function Display(props: TDisplayProps) {
     return (
         <div className="vh-100 d-flex flex-column">
             <ClockWidget />
-            <div className='mx-4'>
+            <div className='mx-3'>
                 <PrayerBannerTimetable prayerTimes={props.prayerTimes} />
             </div>
             <EventWidget />
@@ -30,18 +31,25 @@ function EventWidget() {
 }
 
 function ClockWidget() {
-    let time = new Date().toLocaleTimeString()
-
+    let time = new Date();
+    const colorFilter = {
+        'filter': 'invert(85%)',
+        'height': '50px'
+    };
     const [ctime, setTime] = useState(time)
     const UpdateTime = () => {
-        time = new Date().toLocaleTimeString()
+        time = new Date();
         setTime(time)
     }
     setInterval(UpdateTime)
     return (
-        <div className="bg-primary flex-grow-1 py-4 bg-opacity-75 d-flex align-items-center justify-content-center w-100">
-            <div className="display-1 text-light fw-bolder">
-                {ctime}
+        <div className="bg-dark d-flex flex-grow-1 align-items-center justify-content-center flex-column">
+            <div className="display-6 d-flex align-items-center text-light">
+                <img src={logo.src} alt="Clock" className="pe-3" style={colorFilter} />
+                Islamic Center of Newfoundland
+            </div>
+            <div className="display-1 text-light fw-bold">
+                {ctime.toLocaleTimeString()}
             </div>
         </div>
     );

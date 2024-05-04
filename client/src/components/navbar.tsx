@@ -1,7 +1,6 @@
 //@ts-ignore
 import logo from '../assets/icnl-logo-white-bg.jpg'
 
-import { useState } from 'react';
 
 export default function Navbar() {
     const handleDonateClick = () => {
