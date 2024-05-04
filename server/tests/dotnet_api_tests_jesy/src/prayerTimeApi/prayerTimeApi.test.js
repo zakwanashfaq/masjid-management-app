@@ -42,4 +42,17 @@ describe('Prayer Time API tests', () => {
             expect(typeof data.prayerTimes[prayer].no_change).toBe('boolean');
         });
     });
+
+    // set prayer time 
+    test('Set prayer time without token', async () => {
+        throw new Error('Not implemented on server side yet');
+    });
+
+    test('Set prayer time with token', async () => {
+        throw new Error('Not implemented on server side yet');
+    });
+
+    test('Set prayer time with incorrect format', async () => {
+        throw new Error('Not implemented on server side yet');
+    });
 });

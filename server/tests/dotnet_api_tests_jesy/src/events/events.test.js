@@ -1,4 +1,4 @@
-const { loginWithUsernameAndPassword, tokenFromLoginWithUsernameAndPassword } = require("../auth/auth");
+const { tokenFromLoginWithUsernameAndPassword } = require("../auth/auth");
 
 const API = process.env.API;
 
