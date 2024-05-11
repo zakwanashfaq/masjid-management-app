@@ -1,4 +1,4 @@
-import 'bootstrap/dist/js/bootstrap.bundle.min';
+
 import { useEffect, useState } from 'react';
 import PrayerTimesManager, { EPrayerNames } from '../utils/PrayerTimesWidget';
 
@@ -81,7 +81,7 @@ function AdjustPrayerTimeWidget_input(props: TAdjustPrayerTimeWidgetProps) {
 }
 
 
-function AdjustPrayerTimeWidget() {
+export function AdjustPrayerTimeWidget() {
 
     const prayerTimeManager = new PrayerTimesManager();
     
