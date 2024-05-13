@@ -4,10 +4,22 @@ pipeline {
         CI = 'true'
     }
     stages {
-        stage('Build') {
+        stage('Build - Developement') {
+            when {
+                branch 'development'
+            }
             steps {
-                echo 'Building the app'
-                
+                echo 'Building the app in developement branch'
+
+            }
+        }
+        stage('Build - Production') {
+            when {
+                branch 'main'
+            }
+            steps {
+                echo 'Building the app in main branch'
+
             }
         }
         stage('Test') {
