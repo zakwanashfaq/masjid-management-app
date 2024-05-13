@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+    environment {
+        CI = 'true'
+    }
+    stages {
+        stage('Debug') {
+            steps {
+                echo "Branch: ${env.BRANCH_NAME}"
+            }
+        }
+        stage('Build - Developement') {
+            when {
+                branch 'staging'
+            }
+            steps {
+                echo 'Building the app in developement branch'
+
+            }
+        }
+        stage('Build - Production') {
+            when {
+                branch 'main'
+            }
+            steps {
+                echo 'Building the app in main branch'
+
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing the app'
+            }
+        }
+    }
+}
