@@ -4,6 +4,11 @@ pipeline {
         CI = 'true'
     }
     stages {
+        stage('Debug') {
+            steps {
+                echo "Branch: ${env.BRANCH_NAME}"
+            }
+        }
         stage('Build - Developement') {
             when {
                 branch 'staging'
