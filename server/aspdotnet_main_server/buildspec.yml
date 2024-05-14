@@ -1,6 +1,18 @@
 version: 0.2
 
 phases:
+  install:
+    runtime-versions:
+      dotnet: 7.0
+  pre_build:
+    commands:
+      - echo Restore started on `date`
+      - dotnet restore aspdotnet_main_server.sln
   build:
     commands:
-      - echo "Hello, World!"
+      - echo Build started on `date`
+      - dotnet publish -c Release -o ./build_output aspdotnet_main_server.sln
+artifacts:
+  files:
+    - '**/*'
+  base-directory: 'build_output'
