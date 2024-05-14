@@ -1,9 +1,20 @@
-version: 0.2    
+version: 0.2
+
 phases:
   install:
     commands:
-      - curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --channel STS 
+      - wget https://dot.net/v1/dotnet-install.sh
+      - chmod +x dotnet-install.sh
+      - ./dotnet-install.sh --version 7.0 --install-dir /usr/local/bin/ --runtime dotnet
+  pre_build:
+    commands:
+      - echo Restore started on `date`
+      - dotnet restore aspdotnet_main_server.sln
   build:
     commands:
-      - dotnet restore aspdotnet_main_server.sln
-      - dotnet build aspdotnet_main_server.sln
+      - echo Build started on `date`
+      - dotnet publish -c Release -o ./build_output aspdotnet_main_server.sln
+artifacts:
+  files:
+    - '**/*'
+  base-directory: 'build_output'
