@@ -2,8 +2,10 @@ version: 0.2
 
 phases:
   install:
-    runtime-versions:
-      dotnet: 7.0
+    commands:
+      - wget https://dotnet.microsoft.com/download/dotnet/7.0 -O dotnet-install.sh
+      - chmod +x dotnet-install.sh
+      - ./dotnet-install.sh --version 7.0 --install-dir /usr/local/bin/ --runtime dotnet
   pre_build:
     commands:
       - echo Restore started on `date`
