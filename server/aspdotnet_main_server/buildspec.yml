@@ -3,10 +3,11 @@ version: 0.2
 phases:
   install:
       runtime-versions:
-          dotnet: 8.1
+          dotnet: 8.0
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
+      - ls -al
       # - aws --version
       # - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
       # - REPOSITORY_URI=123456789012.dkr.ecr.us-west-2.amazonaws.com/my-web-app
