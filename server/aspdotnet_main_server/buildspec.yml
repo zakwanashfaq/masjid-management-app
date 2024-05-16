@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
       runtime-versions:
-          dotnet: 7.0.0
+          dotnet: 8.0
   pre_build:
     commands:
       - echo Changing directory to root of server application
@@ -18,3 +18,4 @@ phases:
       - echo Checking the contents of the build_output directory
       - cd build_output
       - ls -al
+      - docker -v
