@@ -1,21 +1,36 @@
 version: 0.2
 
+env:
+  variables:
+    MAIN_BRANCH: "refs/heads/main"
+    STAGING_BRANCH: "refs/heads/staging"
+
 phases:
   install:
-      runtime-versions:
-          dotnet: 8.0
+    runtime-versions:
+      dotnet: 8.0
   pre_build:
     commands:
-      - echo Changing directory to root of server application
+      - echo Changing directory to root of server application...
       - cd server/aspdotnet_main_server
       - ls -al
+      - echo Checking if docker is installed...
+      - docker -v
   build:
     commands:
-      - echo Building the ASP.NET Core application in the "build_output" directory in Linux x64 runtime
-      - dotnet publish -c Release -o ./build_output --runtime linux-x64
+      - |
+        if [ "$CODEBUILD_WEBHOOK_HEAD_REF" = "$MAIN_BRANCH" ]; then
+          echo "Building the ASP.NET Core application in the 'build_output' directory in Linux x64 runtime for main branch"
+          dotnet publish -c Release -o ./build_output --runtime linux-x64
+        elif [ "$CODEBUILD_WEBHOOK_HEAD_REF" = "$STAGING_BRANCH" ]; then
+          echo "Building the ASP.NET Core application in the 'build_output' directory in Linux x64 runtime for staging branch"
+          # Add your build commands for staging branch here
+        else
+          echo "Building the ASP.NET Core application in the 'build_output' directory in Linux x64 runtime for other branches"
+          # Add your build commands for other branches here
+        fi
   post_build:
     commands:
       - echo Checking the contents of the build_output directory
       - cd build_output
       - ls -al
-      - docker -v
