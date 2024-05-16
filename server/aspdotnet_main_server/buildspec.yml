@@ -11,7 +11,7 @@ phases:
       - ls -al
   build:
     commands:
-      - echo Building the ASP.NET Core application in the "build_output" directory, (Linux x64 runtime)
+      - echo Building the ASP.NET Core application in the "build_output" directory in Linux x64 runtime
       - dotnet publish -c Release -o ./build_output --runtime linux-x64
   post_build:
     commands:
