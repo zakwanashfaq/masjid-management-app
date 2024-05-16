@@ -3,29 +3,18 @@ version: 0.2
 phases:
   install:
       runtime-versions:
-          dotnet: 8.0
+          dotnet: 7.0.0
   pre_build:
     commands:
-      - echo Logging in to Amazon ECR...
-      - ls -al
+      - echo Changing directory to root of server application
       - cd server/aspdotnet_main_server
-      - dotnet publish -c Release -o ./build_output --runtime linux-x64
-      - cd build_output
       - ls -al
-      # - aws --version
-      # - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
-      # - REPOSITORY_URI=123456789012.dkr.ecr.us-west-2.amazonaws.com/my-web-app
-      # - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-      # - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
     commands:
-      - echo Build started on `date`
-      - echo Building the Docker image...
-      # - docker build -t $REPOSITORY_URI:latest .
-      # - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+      - echo Building the ASP.NET Core application in the "build_output" directory, (Linux x64 runtime)
+      - dotnet publish -c Release -o ./build_output --runtime linux-x64
   post_build:
     commands:
-      - echo Build completed on `date`
-      - echo Pushing the Docker image...
-      # - docker push $REPOSITORY_URI:latest
-      # - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - echo Checking the contents of the build_output directory
+      - cd build_output
+      - ls -al
