@@ -1,0 +1,11 @@
+# Use the official image as a parent image.
+FROM mcr.microsoft.com/dotnet/aspnet:5.0
+
+# Set the working directory.
+WORKDIR /app
+
+# Copy the build output from Dockerfile.build
+COPY --from=build-env /app/out .
+
+# Specify the command to run on container start.
+ENTRYPOINT ["dotnet", "YourApp.dll"]

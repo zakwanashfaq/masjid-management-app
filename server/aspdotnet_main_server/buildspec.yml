@@ -25,4 +25,3 @@ phases:
       - echo Checking the contents of the build_output directory
       - cd build_output
       - ls -al
-      - docker -v
