@@ -1,17 +1,25 @@
+# make sure to have dotnet-7.0 installed on the machine
+# docker pull mcr.microsoft.com/dotnet/sdk:8.0
 # Use the official image as a parent image.
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
 
 # Set the working directory.
 WORKDIR /app
 
-# Copy the file from your host to your current location.
-COPY *.csproj ./
+# Copy the file from host to current location.
+COPY aspdotnet_main_server.csproj ./
 
 # Run dotnet command to install dependencies.
 RUN dotnet restore
 
-# Copy the rest of your app's source code from your host to your image filesystem.
+# Copy the rest of the source code from host to the image filesystem.
 COPY . ./
 
 # Build the application
-RUN dotnet publish -c Release -o out
+RUN dotnet publish -c Release -o ./build_output --runtime linux-x64
+
+# Set the working directory.
+WORKDIR /app/build_output
+
+# start the server
+ENTRYPOINT ["dotnet", "aspdotnet_main_server.dll"]
