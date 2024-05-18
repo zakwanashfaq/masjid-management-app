@@ -15,6 +15,11 @@ RUN dotnet restore
 # Copy the rest of the source code from host to the image filesystem.
 COPY . ./
 
+# Set the ASPNETCORE_URLS environment variable
+ENV ASPNETCORE_URLS=http://+:5000;https://+:5001
+
+# Update database schema 
+RUN dotnet ef database update
 # Build the application
 RUN dotnet publish -c Release -o ./build_output --runtime linux-x64
 

@@ -7,8 +7,8 @@ services:
     restart: always
     environment:
       POSTGRES_USER: admin
-      POSTGRES_PASSWORD: root
-      POSTGRES_DB: test_db
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: postgres
     ports:
-      - 5439:5432
+      - 6061:5432
   
