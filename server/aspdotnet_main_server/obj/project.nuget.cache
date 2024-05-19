@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "C/vdTBGaTwvk7nhxDu/RZmipswVeiDqtB5VMxp0YZwSglDxgll4wNLs2a4D8gI6qcih2XSMsH2Sevpa4GW9tPg==",
+  "dgSpecHash": "n4PO+Ekl2wVxbcWGroOz0ExUZzLgeyjYofc5zPobab3Y+3g+qacMxWm5KkVu/lTH9TEuXpFXRdAF0tRxcBIRmg==",
   "success": true,
   "projectFilePath": "D:\\masjid-display\\server\\aspdotnet_main_server\\aspdotnet_main_server.csproj",
   "expectedPackageFiles": [
@@ -41,7 +41,10 @@
     "C:\\Users\\Zakwan\\.nuget\\packages\\system.identitymodel.tokens.jwt\\7.5.1\\system.identitymodel.tokens.jwt.7.5.1.nupkg.sha512",
     "C:\\Users\\Zakwan\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\Zakwan\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
-    "C:\\Users\\Zakwan\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512"
+    "C:\\Users\\Zakwan\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512",
+    "C:\\Users\\Zakwan\\.nuget\\packages\\microsoft.netcore.app.runtime.linux-x64\\7.0.19\\microsoft.netcore.app.runtime.linux-x64.7.0.19.nupkg.sha512",
+    "C:\\Users\\Zakwan\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.linux-x64\\7.0.19\\microsoft.aspnetcore.app.runtime.linux-x64.7.0.19.nupkg.sha512",
+    "C:\\Users\\Zakwan\\.nuget\\packages\\microsoft.netcore.app.host.linux-x64\\7.0.19\\microsoft.netcore.app.host.linux-x64.7.0.19.nupkg.sha512"
   ],
   "logs": []
 }

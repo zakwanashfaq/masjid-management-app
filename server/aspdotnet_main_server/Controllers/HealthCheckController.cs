@@ -4,19 +4,15 @@ using Microsoft.AspNetCore.Mvc;
 
 
 namespace aspdotnet_main_server.Controllers;
-
 [ApiController]
-[Route("healthCheck/")]
+[Route("/")]
 public class HealthCheckController : ControllerBase
 {
-
     [HttpGet]
-    [Route("/health")]
+    [Route("")]
     public ActionResult GetHealthCheckStatus()
     {
         return Ok(new { message = "Server is healthy"});
     }
-
-    
 }
 
