@@ -12,7 +12,7 @@ public class HealthCheckController : ControllerBase
     [Route("")]
     public ActionResult GetHealthCheckStatus()
     {
-        return Ok(new { message = "Server is healthy"});
+        return Ok(new { message = "Server is running."});
     }
 }
 
