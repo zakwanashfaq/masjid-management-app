@@ -23,4 +23,4 @@ phases:
   post_build:
     commands:
       - echo "Checking the docker images"
-      - docker ps -a
+      - docker images
