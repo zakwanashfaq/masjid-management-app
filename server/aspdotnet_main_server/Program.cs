@@ -3,7 +3,6 @@ using aspdotnet_main_server.db;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 // Add services to the container.
 ConfigureAuth.ConfigureJWT(builder.Services, builder.Configuration);
 SwaggerConfig.ConfigureSwagger(builder.Services);
@@ -11,6 +10,11 @@ builder.Services.AddControllers();
 builder.Services.AddAuthorization();
 builder.Services.AddDbContext<DataContext>();
 
+// Configure Kestrel server settings to allow host to listen on port 5131
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(5131); // Listen on port 5131 from any IP
+});
 
 var app = builder.Build();
 
@@ -21,7 +25,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();

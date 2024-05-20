@@ -1,0 +1,26 @@
+version: 0.2
+
+env:
+  variables:
+    MAIN_BRANCH: "refs/heads/main"
+    STAGING_BRANCH: "refs/heads/staging"
+
+phases:
+  install:
+    runtime-versions:
+      dotnet: 8.0
+  pre_build:
+    commands:
+      - echo Changing directory to root of server application
+      - cd server/aspdotnet_main_server
+      - ls -al
+      - echo checking if docker is installed
+      - docker -v
+  build:
+    commands:
+      - echo "Building the ASP.NET Core application in the 'build_output' directory in Linux x64 runtime"
+      - docker build -t masjid_api -f Dockerfile .
+  post_build:
+    commands:
+      - echo "Checking the docker images"
+      - docker images
