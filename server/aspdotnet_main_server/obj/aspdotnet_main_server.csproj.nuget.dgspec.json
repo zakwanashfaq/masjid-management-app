@@ -1,32 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\masjid-display\\server\\aspdotnet_main_server\\aspdotnet_main_server.csproj": {}
+    "/app/aspdotnet_main_server.csproj": {}
   },
   "projects": {
-    "D:\\masjid-display\\server\\aspdotnet_main_server\\aspdotnet_main_server.csproj": {
+    "/app/aspdotnet_main_server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\masjid-display\\server\\aspdotnet_main_server\\aspdotnet_main_server.csproj",
+        "projectUniqueName": "/app/aspdotnet_main_server.csproj",
         "projectName": "aspdotnet_main_server",
-        "projectPath": "D:\\masjid-display\\server\\aspdotnet_main_server\\aspdotnet_main_server.csproj",
-        "packagesPath": "C:\\Users\\Zakwan\\.nuget\\packages\\",
-        "outputPath": "D:\\masjid-display\\server\\aspdotnet_main_server\\obj\\",
+        "projectPath": "/app/aspdotnet_main_server.csproj",
+        "packagesPath": "/root/.nuget/packages/",
+        "outputPath": "/app/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Zakwan\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/root/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -83,20 +76,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Runtime.linux-x64",
-              "version": "[7.0.19, 7.0.19]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.linux-x64",
-              "version": "[7.0.19, 7.0.19]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Runtime.linux-x64",
-              "version": "[7.0.19, 7.0.19]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -105,12 +84,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.119\\RuntimeIdentifierGraph.json"
-        }
-      },
-      "runtimes": {
-        "linux-x64": {
-          "#import": []
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.409/RuntimeIdentifierGraph.json"
         }
       }
     }

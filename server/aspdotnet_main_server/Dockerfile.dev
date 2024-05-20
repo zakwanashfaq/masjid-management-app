@@ -1,0 +1,11 @@
+# syntax=docker/dockerfile:1
+
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:7.0-alpine
+ARG TARGETARCH
+
+WORKDIR /app
+# Copy csproj and restore as distinct layers
+
+RUN dotnet restore
+
+CMD ["dotnet", "watch", "run"]

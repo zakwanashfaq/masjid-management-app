@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "6000:5131"
+    volumes:
+      - .:/app

@@ -19,9 +19,10 @@ phases:
   build:
     commands:
       - echo "Building the ASP.NET Core application in the 'build_output' directory in Linux x64 runtime"
-      - dotnet publish -c Release -o ./build_output --runtime linux-x64
+      - docker build -t masjid_api -f Dockerfile .
   post_build:
     commands:
       - echo Checking the contents of the build_output directory
       - cd build_output
       - ls -al
+      - docker ps -a
