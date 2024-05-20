@@ -13,7 +13,8 @@ builder.Services.AddDbContext<DataContext>();
 // Configure Kestrel server settings to allow host to listen on port 5131
 builder.WebHost.ConfigureKestrel(options =>
 {
-    options.ListenAnyIP(5131); // Listen on port 5131 from any IP
+    // Listen on port 5131 from any IP, exposes this port to the host machine
+    options.ListenAnyIP(5131); 
 });
 
 var app = builder.Build();
