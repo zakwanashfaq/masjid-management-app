@@ -22,7 +22,5 @@ phases:
       - docker build -t masjid_api -f Dockerfile .
   post_build:
     commands:
-      - echo Checking the contents of the build_output directory
-      - cd build_output
-      - ls -al
+      - echo "Checking the docker images"
       - docker ps -a
