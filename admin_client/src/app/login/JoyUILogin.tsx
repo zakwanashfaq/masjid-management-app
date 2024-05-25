@@ -17,6 +17,7 @@ import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
 import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
 import BadgeRoundedIcon from '@mui/icons-material/BadgeRounded';
 import loginDarkImage from '../../assets/login-dark-side-image.jpg'
+import loginLightImage from '../../assets/login-light-side-image.jpg'
 
 
 interface FormElements extends HTMLFormControlsCollection {
@@ -73,10 +74,10 @@ export default function JoySignInSideTemplate() {
           zIndex: 1,
           display: 'flex',
           justifyContent: 'flex-end',
-          backdropFilter: 'blur(12px)',
-          backgroundColor: 'rgba(255 255 255 / 0.2)',
+          backdropFilter: 'blur(17px)',
+          backgroundColor: 'rgba(255 255 255 / 0.79)',
           [theme.getColorSchemeSelector('dark')]: {
-            backgroundColor: 'rgba(19 19 24 / 0.4)',
+            backgroundColor: 'rgba(19 19 24 / 0.79)',
           },
         })}
       >
@@ -201,15 +202,13 @@ export default function JoySignInSideTemplate() {
           transition:
             'background-image var(--Transition-duration), left var(--Transition-duration) !important',
           transitionDelay: 'calc(var(--Transition-duration) + 0.1s)',
-          backgroundColor: 'background.level1',
+          backgroundColor: 'background.level3',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          backgroundImage:
-            'url(https://images.unsplash.com/photo-1527181152855-fc03fc7949c8?auto=format&w=1000&dpr=2)',
+          backgroundImage: 'url('+ loginLightImage.src +')',
           [theme.getColorSchemeSelector('dark')]: {
-            backgroundImage:
-              'url(https://images.unsplash.com/photo-1572072393749-3ca9c8ea0831?auto=format&w=1000&dpr=2)',
+            backgroundImage: 'url('+ loginDarkImage.src +')',
           },
         })}
       />
