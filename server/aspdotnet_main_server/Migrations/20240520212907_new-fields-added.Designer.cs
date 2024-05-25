@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using aspdotnet_main_server.db;
@@ -11,9 +12,11 @@ using aspdotnet_main_server.db;
 namespace aspdotnetmainserver.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240520212907_new-fields-added")]
+    partial class newfieldsadded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,7 +74,12 @@ namespace aspdotnetmainserver.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid?>("PrayerTimesId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("PrayerTimesId");
 
                     b.ToTable("OrganizationModel");
                 });
@@ -84,7 +92,7 @@ namespace aspdotnetmainserver.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PrayerTimeModel");
+                    b.ToTable("PrayerTimesModel");
                 });
 
             modelBuilder.Entity("aspdotnet_main_server.Entities.SinglePrayerTimeRecordModel", b =>
@@ -119,7 +127,7 @@ namespace aspdotnetmainserver.Migrations
 
                     b.HasIndex("PrayerTimesModelId");
 
-                    b.ToTable("SinglePrayerTimeRecordModel");
+                    b.ToTable("PrayerTimeRecordModels");
                 });
 
             modelBuilder.Entity("aspdotnet_main_server.Entities.UserModel", b =>
@@ -146,8 +154,9 @@ namespace aspdotnetmainserver.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("OrganizationID")
-                        .HasColumnType("uuid");
+                    b.Property<string>("OrganizationID")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<Guid?>("OrganizationModelId")
                         .HasColumnType("uuid");
@@ -165,8 +174,6 @@ namespace aspdotnetmainserver.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrganizationID");
-
                     b.HasIndex("OrganizationModelId");
 
                     b.ToTable("UserModels");
@@ -179,6 +186,15 @@ namespace aspdotnetmainserver.Migrations
                         .HasForeignKey("OrganizationModelId");
                 });
 
+            modelBuilder.Entity("aspdotnet_main_server.Entities.OrganizationModel", b =>
+                {
+                    b.HasOne("aspdotnet_main_server.Entities.PrayerTimesModel", "PrayerTimes")
+                        .WithMany()
+                        .HasForeignKey("PrayerTimesId");
+
+                    b.Navigation("PrayerTimes");
+                });
+
             modelBuilder.Entity("aspdotnet_main_server.Entities.SinglePrayerTimeRecordModel", b =>
                 {
                     b.HasOne("aspdotnet_main_server.Entities.PrayerTimesModel", null)
@@ -188,22 +204,14 @@ namespace aspdotnetmainserver.Migrations
 
             modelBuilder.Entity("aspdotnet_main_server.Entities.UserModel", b =>
                 {
-                    b.HasOne("aspdotnet_main_server.Entities.OrganizationModel", "Organization")
-                        .WithMany("Users")
-                        .HasForeignKey("OrganizationID");
-
                     b.HasOne("aspdotnet_main_server.Entities.OrganizationModel", null)
-                        .WithMany("PrayerTimes")
+                        .WithMany("Users")
                         .HasForeignKey("OrganizationModelId");
-
-                    b.Navigation("Organization");
                 });
 
             modelBuilder.Entity("aspdotnet_main_server.Entities.OrganizationModel", b =>
                 {
                     b.Navigation("Events");
-
-                    b.Navigation("PrayerTimes");
 
                     b.Navigation("Users");
                 });
