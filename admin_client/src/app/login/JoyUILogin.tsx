@@ -137,7 +137,7 @@ export default function JoySignInSideTemplate() {
                 </Typography>
                 <Typography level="body-sm">
                   New to MasjidAPI?{' '}
-                  <Link href="#replace-with-a-link" level="title-sm">
+                  <Link href="/signup" level="title-sm">
                     Sign up fo free!
                   </Link>
                 </Typography>

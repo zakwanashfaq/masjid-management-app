@@ -137,7 +137,7 @@ export default function JoySignInSideTemplate() {
                 </Typography>
                 <Typography level="body-sm">
                   Already got an account?{' '}
-                  <Link href="#replace-with-a-link" level="title-sm">
+                  <Link href="/login" level="title-sm">
                     Sign in
                   </Link>
                 </Typography>
