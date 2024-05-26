@@ -21,6 +21,7 @@ import CampaignIcon from '@mui/icons-material/Campaign';
 
 import ColorSchemeToggle from './ColorSchemeToggle';
 import { closeSidebar } from './utils';
+import { usePathname } from 'next/navigation';
 
 function Toggler({
   defaultExpanded = false,
@@ -54,7 +55,21 @@ function Toggler({
   );
 }
 
+enum SidebarItemsEnum {
+  Home = '/',
+  PrayerTimes = '/prayerTimes',
+  Events = '/events',
+  Announcements = '/announcements',
+  MyProfile = '/users/myProfile',
+  AddUser = '/users/addUser',
+  ViewEditUsers = '/users/viewEditUsers',
+}
+
 export default function Sidebar() {
+  let pathName = usePathname();
+  const goToPage = (goto: string) => {
+    window.location.href = goto;
+  }
   return (
     <Sheet
       className="Sidebar"
@@ -138,37 +153,37 @@ export default function Sidebar() {
           }}
         >
           <ListItem>
-            <ListItemButton>
+            <ListItemButton selected={pathName === SidebarItemsEnum.Home}>
               <DashboardRoundedIcon />
               <ListItemContent>
-                <Typography level="title-sm">Dashboard</Typography>
+                <Typography level="title-sm" onClick={() => goToPage(SidebarItemsEnum.Home)}>Home</Typography>
               </ListItemContent>
             </ListItemButton>
           </ListItem>
 
           <ListItem>
-            <ListItemButton selected>
+            <ListItemButton selected={pathName === SidebarItemsEnum.PrayerTimes}>
               <AccessTimeIcon />
               <ListItemContent>
-                <Typography level="title-sm">Prayer Times</Typography>
+                <Typography level="title-sm" onClick={() => goToPage(SidebarItemsEnum.PrayerTimes)}>Prayer Times</Typography>
               </ListItemContent>
             </ListItemButton>
           </ListItem>
 
           <ListItem>
-            <ListItemButton>
+            <ListItemButton selected={pathName === SidebarItemsEnum.Events}>
               <EventIcon />
               <ListItemContent>
-                <Typography level="title-sm">Events</Typography>
+                <Typography level="title-sm" onClick={() => goToPage(SidebarItemsEnum.Events)}>Events</Typography>
               </ListItemContent>
             </ListItemButton>
           </ListItem>
 
           <ListItem>
-            <ListItemButton>
+            <ListItemButton  selected={pathName === SidebarItemsEnum.Announcements}>
               <CampaignIcon />
               <ListItemContent>
-                <Typography level="title-sm">Announcements</Typography>
+                <Typography level="title-sm" onClick={() => goToPage(SidebarItemsEnum.Announcements)}>Announcements</Typography>
               </ListItemContent>
             </ListItemButton>
           </ListItem>
@@ -176,7 +191,10 @@ export default function Sidebar() {
           <ListItem nested>
             <Toggler
               renderToggle={({ open, setOpen }) => (
-                <ListItemButton onClick={() => setOpen(!open)}>
+                <ListItemButton 
+                  onClick={() => setOpen(!open)} 
+                  selected={pathName === SidebarItemsEnum.MyProfile || pathName === SidebarItemsEnum.AddUser || pathName === SidebarItemsEnum.ViewEditUsers}
+                  >
                   <GroupRoundedIcon />
                   <ListItemContent>
                     <Typography level="title-sm">Users</Typography>
@@ -189,19 +207,13 @@ export default function Sidebar() {
             >
               <List sx={{ gap: 0.5 }}>
                 <ListItem sx={{ mt: 0.5 }}>
-                  <ListItemButton
-                    role="menuitem"
-                    component="a"
-                    href="/joy-ui/getting-started/templates/profile-dashboard/"
-                  >
-                    My profile
-                  </ListItemButton>
+                  <ListItemButton onClick={() => goToPage(SidebarItemsEnum.MyProfile)}>My profile</ListItemButton>
                 </ListItem>
                 <ListItem>
-                  <ListItemButton>Add a new user</ListItemButton>
+                  <ListItemButton onClick={() => goToPage(SidebarItemsEnum.AddUser)}>Add a new user</ListItemButton>
                 </ListItem>
                 <ListItem>
-                  <ListItemButton>View/Edit Users</ListItemButton>
+                  <ListItemButton onClick={() => goToPage(SidebarItemsEnum.ViewEditUsers)}>View/Edit Users</ListItemButton>
                 </ListItem>
               </List>
             </Toggler>
