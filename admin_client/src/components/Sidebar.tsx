@@ -207,13 +207,13 @@ export default function Sidebar() {
             >
               <List sx={{ gap: 0.5 }}>
                 <ListItem sx={{ mt: 0.5 }}>
-                  <ListItemButton onClick={() => goToPage(SidebarItemsEnum.MyProfile)}>My profile</ListItemButton>
+                  <ListItemButton selected={pathName === SidebarItemsEnum.MyProfile} onClick={() => goToPage(SidebarItemsEnum.MyProfile)}>My profile</ListItemButton>
                 </ListItem>
                 <ListItem>
-                  <ListItemButton onClick={() => goToPage(SidebarItemsEnum.AddUser)}>Add a new user</ListItemButton>
+                  <ListItemButton selected={pathName === SidebarItemsEnum.AddUser} onClick={() => goToPage(SidebarItemsEnum.AddUser)}>Add a new user</ListItemButton>
                 </ListItem>
                 <ListItem>
-                  <ListItemButton onClick={() => goToPage(SidebarItemsEnum.ViewEditUsers)}>View/Edit Users</ListItemButton>
+                  <ListItemButton selected={pathName === SidebarItemsEnum.ViewEditUsers} onClick={() => goToPage(SidebarItemsEnum.ViewEditUsers)}>View/Edit Users</ListItemButton>
                 </ListItem>
               </List>
             </Toggler>
