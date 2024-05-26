@@ -75,9 +75,9 @@ export default function JoySignInSideTemplate() {
           display: 'flex',
           justifyContent: 'flex-end',
           backdropFilter: 'blur(17px)',
-          backgroundColor: 'rgba(255 255 255 / 0.79)',
+          backgroundColor: 'rgba(255 255 255 / 0.85)',
           [theme.getColorSchemeSelector('dark')]: {
-            backgroundColor: 'rgba(19 19 24 / 0.79)',
+            backgroundColor: 'rgba(19 19 24 / 0.85)',
           },
         })}
       >

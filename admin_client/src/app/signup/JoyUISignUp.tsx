@@ -133,7 +133,7 @@ export default function JoySignInSideTemplate() {
             <Stack gap={4} sx={{ mb: 2 }}>
               <Stack gap={1}>
                 <Typography component="h1" level="h3">
-                  Sign up
+                  Create a new account
                 </Typography>
                 <Typography level="body-sm">
                   Already got an account?{' '}
@@ -185,18 +185,6 @@ export default function JoySignInSideTemplate() {
                   <Input type="password" name="confirm_password" />
                 </FormControl>
                 <Stack gap={4} sx={{ mt: 2 }}>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Checkbox size="sm" label="Remember me" name="persistent" />
-                    <Link level="title-sm" href="#replace-with-a-link">
-                      Forgot your password?
-                    </Link>
-                  </Box>
                   <Button type="submit" fullWidth>
                     Sign up
                   </Button>
@@ -211,27 +199,6 @@ export default function JoySignInSideTemplate() {
           </Box>
         </Box>
       </Box>
-      {/* <Box
-        sx={(theme) => ({
-          height: '100%',
-          position: 'fixed',
-          right: 0,
-          top: 0,
-          bottom: 0,
-          left: { xs: 0, md: '50vw' },
-          transition:
-            'background-image var(--Transition-duration), left var(--Transition-duration) !important',
-          transitionDelay: 'calc(var(--Transition-duration) + 0.1s)',
-          backgroundColor: 'background.level3',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          backgroundImage: 'url('+ loginLightImage.src +')',
-          [theme.getColorSchemeSelector('dark')]: {
-            backgroundImage: 'url('+ loginDarkImage.src +')',
-          },
-        })}
-      /> */}
     </CssVarsProvider>
   );
 }

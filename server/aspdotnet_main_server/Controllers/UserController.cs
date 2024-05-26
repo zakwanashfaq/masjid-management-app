@@ -1,5 +1,6 @@
 
 using aspdotnet_main_server.db;
+using aspdotnet_main_server.DTOs;
 using aspdotnet_main_server.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -18,8 +19,14 @@ public class UserController : ControllerBase
         _context = context;
     }
 
+    private string GenerateToken(UserModel user)
+    {
+        
+        return "token";
+    }
 
-    [Authorize]                             
+
+    [Authorize]
     [HttpGet]
     public async Task<ActionResult<UserModel>> GetUser()
     {
@@ -27,7 +34,7 @@ public class UserController : ControllerBase
         // todo: complete the implementation
         var user = new UserModel
         {
-            Email = "test@gmail.com", 
+            Email = "test@gmail.com",
             CreatedAt = DateTime.Now,
             FirstName = "Zakwan",
             LastName = "Zian",
@@ -64,7 +71,7 @@ public class UserController : ControllerBase
         catch (DbUpdateConcurrencyException)
         {
             // todo: remove the throw statement, log the error and return proper response to the user                                                                                       
-            throw(new Exception("User with Id " + id + " failed to save"));
+            throw (new Exception("User with Id " + id + " failed to save"));
         }
 
         return NoContent();
@@ -72,12 +79,39 @@ public class UserController : ControllerBase
 
     [Route("createNewUser")]
     [HttpPost]
-    public async Task<ActionResult<UserModel>> CreateNewUser(UserModel user)
+    public async Task<ActionResult<UserModel>> CreateNewUser(SignUpPayloadDTO payload)
     {
-        _context.UserModels.Add(user);
-        await _context.SaveChangesAsync();
+        Guid id = Guid.NewGuid();
+        UserModel user = new()
+        {
+            Id = id,
+            Email = payload.Email,
+            PhoneNumber = payload.PhoneNumber,
+            CreatedAt = DateTime.Now.ToUniversalTime(),
+            FirstName = payload.FirstName,
+            LastName = payload.LastName,
+            UserRole = "root",
+            UserType = "free",
+            Username = payload.Username,
+            HashedPassword = payload.HashedPassword
+        };
 
-        return CreatedAtAction("GetUser", new { id = user.Id }, user);
+        try
+        {
+            _context.UserModels.Add(user);
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateException ex)
+        {
+            if (ex.InnerException != null && ex.InnerException is Npgsql.PostgresException pgEx && pgEx.SqlState == "23505")
+            {
+                return Conflict("A user with this username already exists.");
+            }
+            return BadRequest("User creation was not successful.");
+        }
+
+        // todo: return a token as well
+        return Ok(new { user });
     }
 
     [Route("createNewUserFromOrganization")]
@@ -92,8 +126,7 @@ public class UserController : ControllerBase
     }
 
     [Authorize]
-    [Route("deleteUser")]
-    [HttpDelete("{id}")]
+    [HttpDelete("deleteUser/{id}")]
     public async Task<IActionResult> DeleteUser(Guid id)
     {
         // Todo: Normal or admin users should not be able to delete root or admin user
@@ -106,6 +139,6 @@ public class UserController : ControllerBase
         _context.UserModels.Remove(user);
         await _context.SaveChangesAsync();
 
-        return Ok(new { message = ("User with Id " + id + " deleted successfully")});
+        return Ok(new { message = ("User with Id " + id + " deleted successfully") });
     }
 }
