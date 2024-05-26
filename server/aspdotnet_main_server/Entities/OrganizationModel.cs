@@ -8,8 +8,8 @@ public class OrganizationModel
     public required Guid Id { get; set; }
     public required string OrganizationName { get; set;}
     public required DateTime CreatedAt { get; set; }
-    public ICollection<UserModel>? PrayerTimes { get; set; }
     public required ICollection<UserModel> Users { get; set; }
     public ICollection<EventModel>? Events { get; set; }
-    
+    public ICollection<PrayerTimesModel>? PrayerTimes { get; set; }
+
 }

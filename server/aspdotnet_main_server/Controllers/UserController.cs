@@ -32,7 +32,9 @@ public class UserController : ControllerBase
             FirstName = "Zakwan",
             LastName = "Zian",
             UserRole = "Admin",
-            UserType = "Free"
+            UserType = "Free",
+            Username = "testuser",
+            HashedPassword = "hash_password"
         };
 
         if (user == null)
