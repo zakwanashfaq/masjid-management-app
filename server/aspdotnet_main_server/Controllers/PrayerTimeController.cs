@@ -1,7 +1,7 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
+using aspdotnet_main_server.enums;
 
 namespace aspdotnet_main_server.Controllers
 {
@@ -27,7 +27,8 @@ namespace aspdotnet_main_server.Controllers
 
             // Extract claims from the JWT token
             var usernameClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name);
-            var roleClaim = User.Claims.FirstOrDefault(c => c.Type == "ClaimTypes.Role");
+            var userOrganizationClaim = User.Claims.FirstOrDefault(c => c.Type == UserTokenEnum.OrganizationID);
+            var roleClaim = User.Claims.FirstOrDefault(c => c.Type == UserTokenEnum.UserRole);
 
             // You can now use the values of these claims
             var username = usernameClaim?.Value;

@@ -1,8 +1,10 @@
 ### Building and running the application
 
 To run the application for development, execute the following command:
+`dotnet watch run` (recommended)
+or
 `docker compose -f compose.dev.yaml up`.
-Remove containers with: `docker compose -f compose.dev.yaml down`.
+Remember to remove containers with: `docker compose -f compose.dev.yaml down`.
 
 To build and run the application in prod, execute the following command:
 `docker compose up --build`.
@@ -13,11 +15,8 @@ Once the api-application is running, it can be accessed at http://localhost:6000
 
 ### Deploying the application (CI)
 
-To deploy the application to the cloud, follow these steps:
-
-1. Build the Docker image by running: `docker build --platform=linux/amd64 -t masjid_api .`.
-
-2. Push the image to your container registry, for example: `docker push myregistry.com/myapp`. todo: Replace dockerhub with aws ecr
+Deployment is taken care of automatically with AWS Codepipeline & AWS Codebuild.
+For reference check `buildspec.yml`, `Dockerfile` & `compose.yaml`.
 
 ### References
 * [Docker's .NET guide](https://docs.docker.com/language/dotnet/)

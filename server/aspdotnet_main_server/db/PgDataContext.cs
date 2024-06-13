@@ -19,5 +19,25 @@ public class DataContext : DbContext
         options.UseNpgsql(Configuration.GetConnectionString("PostgreSQLDatabase"));
     }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<OrganizationModel>()
+            .HasMany(o => o.Users);
+
+        modelBuilder.Entity<OrganizationModel>()
+            .HasMany(o => o.Events);
+
+        modelBuilder.Entity<OrganizationModel>()
+            .HasMany(o => o.PrayerTimes);
+        
+        modelBuilder.Entity<UserModel>()
+            .HasIndex(u => u.Username)
+            .IsUnique();
+    }
+
     public DbSet<EventModel> EventModels { get; set; }
+    public DbSet<OrganizationModel> OrganizationModel { get; set; }
+    public DbSet<PrayerTimesModel> PrayerTimeModel { get; set; }
+    public DbSet<UserModel> UserModels { get; set; }
+
 }

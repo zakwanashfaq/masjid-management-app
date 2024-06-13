@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using aspdotnet_main_server.db;
@@ -11,9 +12,11 @@ using aspdotnet_main_server.db;
 namespace aspdotnetmainserver.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240523121301_updated-Users-Organizations-again")]
+    partial class updatedUsersOrganizationsagain
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,26 +85,44 @@ namespace aspdotnetmainserver.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.HasKey("Id");
+
+                    b.ToTable("PrayerTimeModel");
+                });
+
+            modelBuilder.Entity("aspdotnet_main_server.Entities.SinglePrayerTimeRecordModel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("DelayInMinutes")
                         .HasColumnType("integer");
 
+                    b.Property<bool>("IsDelayInMinutes")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsSpecific")
+                        .HasColumnType("boolean");
+
                     b.Property<DateTime>("LastUpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid?>("OrganizationModelId")
+                    b.Property<Guid?>("PrayerTimesModelId")
                         .HasColumnType("uuid");
 
-                    b.Property<TimeOnly>("SpecificPrayerTime")
-                        .HasColumnType("time without time zone");
+                    b.Property<string>("SpecificPrayerTime")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrganizationModelId");
+                    b.HasIndex("PrayerTimesModelId");
 
-                    b.ToTable("PrayerTimeModel");
+                    b.ToTable("SinglePrayerTimeRecordModel");
                 });
 
             modelBuilder.Entity("aspdotnet_main_server.Entities.UserModel", b =>
@@ -122,12 +143,14 @@ namespace aspdotnetmainserver.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("HashedPassword")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<Guid?>("OrganizationID")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid?>("OrganizationModelId")
                         .HasColumnType("uuid");
@@ -143,16 +166,11 @@ namespace aspdotnetmainserver.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("OrganizationModelId");
+                    b.HasIndex("OrganizationID");
 
-                    b.HasIndex("Username")
-                        .IsUnique();
+                    b.HasIndex("OrganizationModelId");
 
                     b.ToTable("UserModels");
                 });
@@ -164,18 +182,24 @@ namespace aspdotnetmainserver.Migrations
                         .HasForeignKey("OrganizationModelId");
                 });
 
-            modelBuilder.Entity("aspdotnet_main_server.Entities.PrayerTimesModel", b =>
+            modelBuilder.Entity("aspdotnet_main_server.Entities.SinglePrayerTimeRecordModel", b =>
                 {
-                    b.HasOne("aspdotnet_main_server.Entities.OrganizationModel", null)
+                    b.HasOne("aspdotnet_main_server.Entities.PrayerTimesModel", null)
                         .WithMany("PrayerTimes")
-                        .HasForeignKey("OrganizationModelId");
+                        .HasForeignKey("PrayerTimesModelId");
                 });
 
             modelBuilder.Entity("aspdotnet_main_server.Entities.UserModel", b =>
                 {
-                    b.HasOne("aspdotnet_main_server.Entities.OrganizationModel", null)
+                    b.HasOne("aspdotnet_main_server.Entities.OrganizationModel", "Organization")
                         .WithMany("Users")
+                        .HasForeignKey("OrganizationID");
+
+                    b.HasOne("aspdotnet_main_server.Entities.OrganizationModel", null)
+                        .WithMany("PrayerTimes")
                         .HasForeignKey("OrganizationModelId");
+
+                    b.Navigation("Organization");
                 });
 
             modelBuilder.Entity("aspdotnet_main_server.Entities.OrganizationModel", b =>
@@ -185,6 +209,11 @@ namespace aspdotnetmainserver.Migrations
                     b.Navigation("PrayerTimes");
 
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("aspdotnet_main_server.Entities.PrayerTimesModel", b =>
+                {
+                    b.Navigation("PrayerTimes");
                 });
 #pragma warning restore 612, 618
         }
