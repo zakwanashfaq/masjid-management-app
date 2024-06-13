@@ -19,12 +19,12 @@ phases:
   build:
     commands:
       - echo "Building the ASP.NET Core application in the 'build_output' directory in Linux x64 runtime"
-      - docker build -t masjidapi -f Dockerfile .
+      - docker build -t masjid-api -f Dockerfile .
   post_build:
     commands:
       - echo "Checking the docker images"
       - docker images
       - echo "Pushing image to ECR repositorty - masjidapi"
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 891228276748.dkr.ecr.us-east-1.amazonaws.com
-      - docker tag masjidapi:latest 891228276748.dkr.ecr.us-east-1.amazonaws.com/masjidapi:latest
-      - docker push 891228276748.dkr.ecr.us-east-1.amazonaws.com/masjidapi:latest
+      - docker tag masjid-api:latest public.ecr.aws/h5i1h9n9/masjid-api:latest
+      - docker push public.ecr.aws/h5i1h9n9/masjid-api:latest
