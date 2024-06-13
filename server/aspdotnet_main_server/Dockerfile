@@ -4,6 +4,8 @@
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:7.0-alpine AS build
 ARG TARGETARCH
 
+RUN echo "Building production application..."
+
 COPY . /source
 
 WORKDIR /source
