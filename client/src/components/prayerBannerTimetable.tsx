@@ -49,7 +49,7 @@ export default function PrayerBannerTimetable(props: TPrayerBannerTimetableProps
     // Todo: Make an adapter for this so it does not need to be copy pasted
     const prayerTimesObj: any = PrayTimes("ISNA");
     prayerTimesObj.adjust({ asr: 'Hanafi' });
-    const prayerTimesTemp: PrayerTimeTypeOutput = prayerTimesObj.getTimes(new Date(), [47.6, -52.7], -3.5, 1, "24h");
+    const prayerTimesTemp: PrayerTimeTypeOutput = prayerTimesObj.getTimes(new Date(), [47.6, -52.7], -3.5, "auto", "24h");
     const prayerTimes: prayerTimesType = {
         fajr: prayerTimesTemp.fajr.replace(':', ''),
         shurooq: prayerTimesTemp.sunrise.replace(':', ''),
