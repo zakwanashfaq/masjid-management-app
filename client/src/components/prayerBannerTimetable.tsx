@@ -323,7 +323,7 @@ function PrayerTimeTableHorizontal(props: PrayerTimeTableProps) {
                             <TableTileIqama text={props.prayerTimes.asr} highlight={props.highlight === EPrayerNames.ASR} />
                             <TableTileIqama text={props.prayerTimes.maghrib} highlight={props.highlight === EPrayerNames.MAGHRIB} />
                             <TableTileIqama text={props.prayerTimes.isha} highlight = {props.highlight === EPrayerNames.ISHA} />
-                            <TableTileIqama text="1330" highlight={false}/>
+                            <TableTileIqama text="1329" highlight={false}/>
                         </tr>
                     </tbody>
                 </table>
