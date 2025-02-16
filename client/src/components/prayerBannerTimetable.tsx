@@ -396,7 +396,7 @@ function PrayerTimeTableVertical(props: PrayerTimeTableProps) {
                         <tr>
                             <TableHeaderTileMobile text="Jumma" highlight={false} />
                             <TableTileMobileAzan text={props.prayerTimesOriginal.zuhr} highlight={false} />
-                            <TableTileMobileIqama text="1315" highlight={false} />
+                            <TableTileMobileIqama text="1330" highlight={false} />
                         </tr>
                     </tbody>
                 </table>
