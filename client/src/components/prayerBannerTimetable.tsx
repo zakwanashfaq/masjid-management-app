@@ -67,15 +67,12 @@ export async function fetchPrayerTimes(): Promise<prayerTimesType> {
         jumma: "1300",
       };
   
-      console.log(prayerTimes);
       return prayerTimes;
     } catch (error) {
       console.error('Error fetching prayer times:', error);
       throw error;
     }
   }
-
-  fetchPrayerTimes();
 
   export default function PrayerBannerTimetable(props: TPrayerBannerTimetableProps) {
     const [prayerTimes, setPrayerTimes] = useState<prayerTimesType | null>(null);
