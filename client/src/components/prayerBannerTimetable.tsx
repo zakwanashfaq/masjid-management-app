@@ -1,6 +1,7 @@
 import PrayTimes from "../utils/PrayerTimes";
 import { EPrayerNames, TPrayerTimePayload } from "../utils/PrayerTimesWidget";
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 
 export type prayerTimesType = {
@@ -44,71 +45,103 @@ type TPrayerBannerTimetableProps = {
     prayerTimes: TPrayerTimePayload
 }
 
-export default function PrayerBannerTimetable(props: TPrayerBannerTimetableProps) {
-
-    // Todo: Make an adapter for this so it does not need to be copy pasted
-    const prayerTimesObj: any = PrayTimes("ISNA");
-    prayerTimesObj.adjust({ asr: 'Hanafi' });
-    const prayerTimesTemp: PrayerTimeTypeOutput = prayerTimesObj.getTimes(new Date(), [47.6, -52.7], -3.5, "auto", "24h");
-    const prayerTimes: prayerTimesType = {
-        fajr: prayerTimesTemp.fajr.replace(':', ''),
-        shurooq: prayerTimesTemp.sunrise.replace(':', ''),
-        zuhr: prayerTimesTemp.dhuhr.replace(':', ''),
-        asr: prayerTimesTemp.asr.replace(':', ''),
-        maghrib: prayerTimesTemp.maghrib.replace(':', ''),
-        isha: prayerTimesTemp.isha.replace(':', ''),
-        jumma: "1300",
+export async function fetchPrayerTimes(): Promise<prayerTimesType> {
+    const params = {
+      city: "St. John's",
+      country: "Canada",
+      method: 2,
+      school: 1,
     };
+  
+    try {
+      const response = await axios.get('https://api.aladhan.com/v1/timingsByCity', { params });
+      const prayerTimesTemp = response.data;
+  
+      const prayerTimes: prayerTimesType = {
+        fajr: prayerTimesTemp.data.timings.Fajr.replace(':', ''),
+        shurooq: prayerTimesTemp.data.timings.Sunrise.replace(':', ''),
+        zuhr: prayerTimesTemp.data.timings.Dhuhr.replace(':', ''),
+        asr: prayerTimesTemp.data.timings.Asr.replace(':', ''),
+        maghrib: prayerTimesTemp.data.timings.Maghrib.replace(':', ''),
+        isha: prayerTimesTemp.data.timings.Isha.replace(':', ''),
+        jumma: "1300",
+      };
+  
+      console.log(prayerTimes);
+      return prayerTimes;
+    } catch (error) {
+      console.error('Error fetching prayer times:', error);
+      throw error;
+    }
+  }
 
-    const prayerTimesOriginal = { ...prayerTimes };
+  fetchPrayerTimes();
 
-    Object.keys(prayerTimes).forEach((key) => {
-        if (props.prayerTimes[key as keyof TPrayerTimePayload]?.is_specific_time_active) {
-            prayerTimes[key as keyof prayerTimesType] = props.prayerTimes[key as keyof TPrayerTimePayload].specific_time_value;
-        }
-        else if (props.prayerTimes[key as keyof TPrayerTimePayload]?.is_delay_in_minutes_active) {
+  export default function PrayerBannerTimetable(props: TPrayerBannerTimetableProps) {
+    const [prayerTimes, setPrayerTimes] = useState<prayerTimesType | null>(null);
+    const [prayerTimesOriginal, setPrayerTimesOriginal] = useState<prayerTimesType | null>(null);
+    const [timeNow, setTimeNow] = useState<number>(new Date().getHours() * 100 + new Date().getMinutes());
+    const [highlight, setHighlight] = useState<string>("");
+  
+    useEffect(() => {
+      async function loadTimes() {
+        const apiTimes = await fetchPrayerTimes();
+        const adjustedTimes = { ...apiTimes };
+  
+        Object.keys(adjustedTimes).forEach((key) => {
+          if (props.prayerTimes[key as keyof TPrayerTimePayload]?.is_specific_time_active) {
+            adjustedTimes[key as keyof prayerTimesType] =
+              props.prayerTimes[key as keyof TPrayerTimePayload].specific_time_value;
+          } else if (props.prayerTimes[key as keyof TPrayerTimePayload]?.is_delay_in_minutes_active) {
             const time = new Date();
-            time.setHours(parseInt(prayerTimes[key as keyof prayerTimesType].substr(0, 2)));
-            time.setMinutes(parseInt(prayerTimes[key as keyof prayerTimesType].substr(2, 2)) + props.prayerTimes[key as keyof TPrayerTimePayload].delay_in_minutes_value);
+            time.setHours(parseInt(adjustedTimes[key as keyof prayerTimesType].substr(0, 2)));
+            time.setMinutes(
+              parseInt(adjustedTimes[key as keyof prayerTimesType].substr(2, 2)) +
+              props.prayerTimes[key as keyof TPrayerTimePayload].delay_in_minutes_value
+            );
             let hours = time.getHours().toString().padStart(2, '0');
             let minutes = time.getMinutes().toString().padStart(2, '0');
-            prayerTimes[key as keyof prayerTimesType] = hours + minutes;
-        }
-    });
-
-    const [timeNow, setTimeNow] = useState(new Date().getHours() * 100 + new Date().getMinutes());
-    const [highlight, setHighlight] = useState("");
-
+            adjustedTimes[key as keyof prayerTimesType] = hours + minutes;
+          }
+        });
+  
+        setPrayerTimes(adjustedTimes);
+        setPrayerTimesOriginal(apiTimes);
+      }
+  
+      loadTimes();
+    }, [props.prayerTimes]);
+  
     useEffect(() => {
-        const interval = setInterval(() => {
-            setTimeNow(new Date().getHours() * 100 + new Date().getMinutes());
-        }, 60000); // Update timeNow every minute
-
-        return () => clearInterval(interval); // Clear interval on component unmount
+      const interval = setInterval(() => {
+        setTimeNow(new Date().getHours() * 100 + new Date().getMinutes());
+      }, 60000);
+  
+      return () => clearInterval(interval);
     }, []);
-
+  
     useEffect(() => {
-        if (timeNow >= parseInt(prayerTimesOriginal.fajr) && timeNow < parseInt(prayerTimesOriginal.shurooq)) {
-            setHighlight(EPrayerNames.FAJR);
-        }
-        else if (timeNow >= parseInt(prayerTimesOriginal.shurooq) && timeNow < parseInt(prayerTimesOriginal.zuhr)) {
-            setHighlight(EPrayerNames.SHUROOQ);
-        }
-        else if (timeNow >= parseInt(prayerTimesOriginal.zuhr) && timeNow < parseInt(prayerTimesOriginal.asr)) {
-            setHighlight(EPrayerNames.ZUHR);
-        }
-        else if (timeNow >= parseInt(prayerTimesOriginal.asr) && timeNow < parseInt(prayerTimesOriginal.maghrib)) {
-            setHighlight(EPrayerNames.ASR);
-        }
-        else if (timeNow >= parseInt(prayerTimesOriginal.maghrib) && timeNow < parseInt(prayerTimesOriginal.isha)) {
-            setHighlight(EPrayerNames.MAGHRIB);
-        }
-        else if (timeNow >= parseInt(prayerTimesOriginal.isha)) {
-            setHighlight(EPrayerNames.ISHA);
-        }
+      if (!prayerTimesOriginal) return;
+  
+      const now = timeNow;
+      if (now >= parseInt(prayerTimesOriginal.fajr) && now < parseInt(prayerTimesOriginal.shurooq)) {
+        setHighlight(EPrayerNames.FAJR);
+      } else if (now >= parseInt(prayerTimesOriginal.shurooq) && now < parseInt(prayerTimesOriginal.zuhr)) {
+        setHighlight(EPrayerNames.SHUROOQ);
+      } else if (now >= parseInt(prayerTimesOriginal.zuhr) && now < parseInt(prayerTimesOriginal.asr)) {
+        setHighlight(EPrayerNames.ZUHR);
+      } else if (now >= parseInt(prayerTimesOriginal.asr) && now < parseInt(prayerTimesOriginal.maghrib)) {
+        setHighlight(EPrayerNames.ASR);
+      } else if (now >= parseInt(prayerTimesOriginal.maghrib) && now < parseInt(prayerTimesOriginal.isha)) {
+        setHighlight(EPrayerNames.MAGHRIB);
+      } else if (now >= parseInt(prayerTimesOriginal.isha)) {
+        setHighlight(EPrayerNames.ISHA);
+      }
     }, [timeNow, prayerTimesOriginal]);
-
-
+  
+    if (!prayerTimes || !prayerTimesOriginal) {
+      return <div>Loading prayer times...</div>;
+    }
 
     return (
         <>
