@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import AboutUsWidget from '../components/aboutUsWidget';
+import AnnouncementWidget from "../components/announcementsWidget";
 import Footer from '../components/footer';
 import Navbar from '../components/navbar';
 import PrayerBannerTimetable from '../components/prayerBannerTimetable';
@@ -43,6 +44,9 @@ function HomePage() {
       <div className='container-lg flex-grow-1'>
         {landingPageData ? <PrayerBannerTimetable prayerTimes={landingPageData.prayerTimes} /> : <LoadingPrayerTimeTable />}
         <br />
+        <div className="row pb-4">
+                <AnnouncementWidget />
+            </div>
         <div className="row pb-4">
           {/* <div className="col-12 col-lg-4">
             <UpcomingEventsWidget />

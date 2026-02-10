@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import AboutUsWidget from "src/components/aboutUsWidget";
+import AnnouncementWidget from "src/components/announcementsWidget";
 import PrayerBannerTimetable from "src/components/prayerBannerTimetable";
 
 function LoadingPrayerTimeTable() {
@@ -37,6 +38,9 @@ export default function Page() {
         <>
             {landingPageData ? <PrayerBannerTimetable prayerTimes={landingPageData.prayerTimes} /> : <LoadingPrayerTimeTable />}
             <br />
+            <div className="row pb-4">
+                <AnnouncementWidget />
+            </div>
             <div className="row pb-4">
             {/* <div className="col-12 col-lg-4">
                 <UpcomingEventsWidget />
