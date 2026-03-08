@@ -72,7 +72,7 @@ export default function PrayerBannerTimetable(props: TPrayerBannerTimetableProps
                     asr: data.data.timings.Asr.replace(':', ''),
                     maghrib: data.data.timings.Maghrib.replace(':', ''),
                     isha: data.data.timings.Isha.replace(':', ''),
-                    jumma: "1300",
+                    jumma: "1335",
                 };
 
                 setPrayerTimes(times);
@@ -99,7 +99,7 @@ export default function PrayerBannerTimetable(props: TPrayerBannerTimetableProps
         asr: "1500",
         maghrib: "1800",
         isha: "2000",
-        jumma: "1300",
+        jumma: "1335",
     };
 
     const prayerTimesOriginal = { ...adjustedPrayerTImes };
@@ -350,7 +350,7 @@ function PrayerTimeTableHorizontal(props: PrayerTimeTableProps) {
                             <TableTileIqama text={props.prayerTimes.asr} highlight={props.highlight === EPrayerNames.ASR} />
                             <TableTileIqama text={props.prayerTimes.maghrib} highlight={props.highlight === EPrayerNames.MAGHRIB} />
                             <TableTileIqama text={props.prayerTimes.isha} highlight = {props.highlight === EPrayerNames.ISHA} />
-                            <TableTileIqama text="1300" highlight={false}/>
+                            <TableTileIqama text="1335" highlight={false}/>
                         </tr>
                     </tbody>
                 </table>
@@ -423,7 +423,7 @@ function PrayerTimeTableVertical(props: PrayerTimeTableProps) {
                         <tr>
                             <TableHeaderTileMobile text="Jumma" highlight={false} />
                             <TableTileMobileAzan text={props.prayerTimesOriginal.zuhr} highlight={false} />
-                            <TableTileMobileIqama text="1300" highlight={false} />
+                            <TableTileMobileIqama text="1335" highlight={false} />
                         </tr>
                     </tbody>
                 </table>
